@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+}
+
+.content-wrapper {
+  height: 100%;
+}
+.navigation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.file-path {
+  width: 80%;
+}
+.search-section > p {
+  margin: 0;
+}
+
+.main-explorer-content {
+  height: 90%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.quick-access {
+  display: flex;
+  flex-direction: column;
+}
+.side-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.side-panel > div {
+  padding: 1em;
+}
