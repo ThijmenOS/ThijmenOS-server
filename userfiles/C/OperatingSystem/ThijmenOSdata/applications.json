@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Explorer",
+    "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
+    "exeLocation": "C/ProgramFiles/fileexplorer/file-explorer.html",
+    "mimeTypes": []
+  },
+  {
+    "title": "NoteBlock",
+    "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
+    "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
+    "mimeTypes": ["txt"]
+  },
+  {
+    "title": "testAapp",
+    "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
+    "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
+    "mimeTypes": ["txt"]
+  }
+]
