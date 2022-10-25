@@ -5,12 +5,9 @@ class OS {
     };
   }
   call(method, params, callback) {
-    let appName = document
-      .getElementById("os-class-element")
-      .getAttribute("data-id");
     window.top.postMessage(
       {
-        origin: appName,
+        origin: window.name,
         method: method,
         params: params,
       },

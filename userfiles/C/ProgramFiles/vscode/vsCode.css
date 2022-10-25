@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+}
+.left-side-app {
+  position: absolute;
+  height: 100%;
+}
+.explorer {
+  left: 3em;
+  width: 10em;
+  background-color: #202020;
+  overflow-y: auto;
+}
+.menu {
+  background-color: #333333;
+  width: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit {
+  left: 13em;
+  background-color: #0f0f0f;
+  width: 70.3%;
+}
+.vs-code-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.vs-code-menu.upper {
+  height: 50%;
+  justify-content: space-evenly;
+}
+.vs-code-menu.lower {
+  height: 20%;
+  justify-content: space-evenly;
+}
+.vs-code-icon {
+  transform: scale(1.6);
+  color: white;
+  cursor: pointer;
+}
+.vs-code-small-icon {
+  height: 1em;
+  cursor: pointer;
+}
+#editor {
+  position: absolute;
+  top: 2.7em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.vs-code-top-bar-files-and-options {
+  background-color: #202020;
+  width: 100%;
+  height: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.file-in-explorer {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 0.2em;
+  user-select: none;
+}
+
+.file-in-explorer:hover {
+  background-color: #333333;
+}
+.file-in-explorer * {
+  margin: 0;
+  color: #9c9c9c;
+}
+
+.vs-code-file-in-explorer {
+  margin-left: 0.5em;
+  font-size: 0.7em;
+}
+#vs-code-right-click-menu {
+  position: fixed;
+  z-index: 100;
+  width: 5em;
+  background-color: rgb(22, 22, 22);
+  display: none;
+}
+#vs-code-right-click-menu.visible {
+  display: block;
+}
+#vs-code-right-click-menu .vs-code-right-click-menu-option {
+  padding: 0.3em;
+  font-size: 0.7em;
+  color: #9c9c9c;
+  cursor: pointer;
+}
+.vs-code-right-click-menu-option:hover {
+  background-color: #0f0f0f;
+}
+.open-file-vs-code-top-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0em 1em 0em 1em;
+  height: 100%;
+  cursor: pointer;
+}
+.open-file-vs-code-top-header:hover {
+  background-color: #0f0f0f;
+}
+.open-file-vs-code-top-header * {
+  margin: 0;
+}
+.open-file-vs-code-top-header p {
+  font-size: 0.7em;
+  color: #9c9c9c;
+  margin-left: 0.5em;
+}
+#open-vs-code-files {
+  max-height: 2em;
+  overflow: auto;
+}
+#inner-scroll-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: left;
+  height: 100%;
+  max-height: 2em;
+  top: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overflow-x: auto; /*add this so you get bottom scrollbar*/
+  white-space: nowrap;
+  position: absolute;
+}
+#inner-scroll-container::-webkit-scrollbar {
+  height: 0.2em;
+}
+#inner-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+#inner-scroll-container::-webkit-scrollbar-thumb {
+  background: rgb(22, 22, 22);
+}
+.explorer::-webkit-scrollbar {
+  width: 0.4em;
+}
+.explorer::-webkit-scrollbar-track {
+  background: transparent;
+}
+.explorer::-webkit-scrollbar-thumb {
+  background: rgb(99, 99, 99);
+}
+.vs-code-options {
+  display: flex;
+  height: 100%;
+  z-index: 120;
+  background: #202020;
+  align-items: center;
+  width: 2em;
+  justify-content: center;
+}
+.dir-child {
+  margin-left: 0.5em;
+}

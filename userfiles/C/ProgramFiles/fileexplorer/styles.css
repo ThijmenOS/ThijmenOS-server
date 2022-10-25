@@ -19,7 +19,7 @@ body {
 }
 
 .main-explorer-content {
-  height: 90%;
+  height: 85%;
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
@@ -36,4 +36,39 @@ body {
 }
 .side-panel > div {
   padding: 1em;
+}
+.directory-item > img {
+  height: 20px;
+  width: 20px;
+}
+.directory-item > p {
+  margin: 0;
+}
+.directory-item {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  cursor: pointer;
+}
+.directory-item:hover {
+  background-color: rgba(216, 216, 216, 0.233);
+}
+#right-click-menu {
+  position: fixed;
+  z-index: 100;
+  width: 8em;
+  background-color: rgb(184, 184, 184);
+  display: none;
+}
+#right-click-menu.visible {
+  display: block;
+}
+#right-click-menu .right-click-menu-option {
+  padding: 0.3em;
+  font-size: 1em;
+  color: #353535;
+  cursor: pointer;
+}
+.right-click-menu-option:hover {
+  background-color: #7e7e7e;
 }

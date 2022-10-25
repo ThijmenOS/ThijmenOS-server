@@ -9,12 +9,12 @@
     "title": "NoteBlock",
     "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
     "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
-    "mimeTypes": ["txt"]
+    "mimeTypes": ["txt", "json", "html"]
   },
   {
-    "title": "testAapp",
-    "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
-    "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
+    "title": "vsCode",
+    "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
+    "exeLocation": "C/ProgramFiles/vscode/vscode.html",
     "mimeTypes": ["txt"]
   }
 ]

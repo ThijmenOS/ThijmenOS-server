@@ -5,7 +5,7 @@ import cors from "cors";
 
 const app = express();
 app.use(cors());
-app.use("/static", express.static(__dirname + "/userfiles"));
+app.use("/static", express.static("userfiles/"));
 const port = 8080;
 
 let baseDir = "userfiles\\";
