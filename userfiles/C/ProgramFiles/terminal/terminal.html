@@ -1,0 +1,39 @@
+<head>
+    <meta name="title" content="Terminal" />
+    <meta name="iconLocation" content="C/ProgramFiles/terminal/terminal-icon.svg" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <script src="../operatingSystemApi.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
+</head>
+
+<body>
+</body>
+
+<script>
+    let os = new OS();
+    let basePath = 'C/'
+    let currentPath = basePath;
+
+    function handleDirectoryChange(path) {
+        if (path == "non-existant") {
+            term.echo("Provided path does not exist");
+            return;
+        };
+
+        currentPath = path;
+        term.set_prompt(currentPath + ">")
+    }
+
+    let term = $('body').terminal({
+        ping: function () { this.echo('pong') },
+        cd: async function (path) {
+
+            os.call('changeDir', currentPath + path, (res) => res.sender == "system" && handleDirectoryChange(res.return))
+        }
+    }, {
+        greetings: '<Thijmen OS command line interface> \n',
+        name: 'Thijmen OS',
+        prompt: `${currentPath}>`,
+    });
+</script>

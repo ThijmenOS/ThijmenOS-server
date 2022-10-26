@@ -1,0 +1,41 @@
+{
+  "system": {
+    "sounds": {},
+    "notifications": {},
+    "storage": {}
+  },
+  "personalisation": {
+    "background": {}
+  },
+  "apps": {
+    "installedApps": [
+      {
+        "title": "Explorer",
+        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
+        "exeLocation": "C/ProgramFiles/fileexplorer/file-explorer.html",
+        "mimeTypes": []
+      },
+      {
+        "title": "NoteBlock",
+        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
+        "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
+        "mimeTypes": ["txt", "json", "html"]
+      },
+      {
+        "title": "vsCode",
+        "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
+        "exeLocation": "C/ProgramFiles/vscode/vscode.html",
+        "mimeTypes": ["txt"]
+      }
+    ],
+    "defaultApps": {
+      "txt": {
+        "title": "NoteBlock",
+        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
+        "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
+        "mimeTypes": ["txt", "json", "html"]
+      }
+    }
+  },
+  "accounts": {}
+}
