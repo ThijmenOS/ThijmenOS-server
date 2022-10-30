@@ -68,11 +68,8 @@ function openFile(fileName, filePath = "", fileExt = "") {
   if (index > -1) {
     switchSession(index);
   } else {
-    os.call(
-      "readFile",
-      filePath,
-      (res) =>
-        res.sender == "system" && handleFileRead(fileName, fileExt, res.return)
+    os.call("readFile", filePath, (res) =>
+      handleFileRead(fileName, fileExt, res.eventData)
     );
   }
 }
@@ -95,11 +92,7 @@ function showOptions(file, ext) {
 }
 
 function getUserDirectories(filePath = "") {
-  os.call(
-    "filesInDir",
-    filePath,
-    (res) => res.sender == "system" && handleDirResponse(res.return)
-  );
+  os.call("filesInDir", filePath, (res) => handleDirResponse(res.eventData));
 }
 
 function handleDirResponse(files) {

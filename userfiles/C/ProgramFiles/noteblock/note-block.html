@@ -16,14 +16,10 @@
 <script>
     let os = new OS();
 
-    window.addEventListener('message', (event) => {
-        if (event.data.sender != "system") {
-            getFile(event.data.return);
-        }
-    });
+    os.on("openFile", (event) => getFile(event.eventData))
 
     function getFile(path) {
-        os.call("readFile", path, (res) => setContent(res.return));
+        os.call("readFile", path, (res) => setContent(res.eventData));
     }
 
     function setContent(content) {

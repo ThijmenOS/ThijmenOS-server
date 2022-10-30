@@ -1,7 +1,13 @@
 class OS {
+  on(eventName, callback) {
+    window.onmessage = ({ data }) => {
+      if (data.eventName == eventName) callback(data);
+    };
+  }
+
   #listen(callback) {
-    window.onmessage = (e) => {
-      callback(e.data);
+    window.onmessage = ({ data }) => {
+      callback(data);
     };
   }
   call(method, params, callback) {

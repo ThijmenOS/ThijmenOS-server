@@ -4,6 +4,7 @@ import FileSystemController from "../controllers/filesystem/FileSystemController
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
+import { Mkdir, Path } from "@common/FileSystem";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =
@@ -25,6 +26,27 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       let requestedFile = req.query.file as string;
 
       let result = this._fileSystemController.readFile(requestedFile);
+
+      res.send(result);
+    });
+    this._router.post("/makeDirectory", (req, res) => {
+      let bodyQuery: Mkdir = req.body;
+
+      let result = this._fileSystemController.makeDirectory(bodyQuery);
+
+      res.send(result);
+    });
+    this._router.post("/makeFile", (req, res) => {
+      let bodyQuery: Mkdir = req.body;
+      let result = this._fileSystemController.makeFile(bodyQuery);
+
+      res.send;
+    });
+
+    this._router.post("/removeDirectory", (req, res) => {
+      let bodyQuery: { Path: Path } = req.body;
+
+      let result = this._fileSystemController.removeDirectory(bodyQuery.Path);
 
       res.send(result);
     });

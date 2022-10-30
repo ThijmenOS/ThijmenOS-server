@@ -2,9 +2,9 @@
     <meta name="title" content="Terminal" />
     <meta name="iconLocation" content="C/ProgramFiles/terminal/terminal-icon.svg" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <script src="deps/jquery-terminal.js"></script>
     <script src="../operatingSystemApi.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
+    <link rel="stylesheet" href="deps/terminal.css" />
 </head>
 
 <body>
@@ -12,28 +12,60 @@
 
 <script>
     let os = new OS();
-    let basePath = 'C/'
+    let basePath = 'C'
     let currentPath = basePath;
 
     function handleDirectoryChange(path) {
         if (path == "non-existant") {
             term.echo("Provided path does not exist");
             return;
-        };
+        }
 
         currentPath = path;
-        term.set_prompt(currentPath + ">")
+        term.set_prompt(currentPath + "/>");
+    }
+    function printToConsole(args) {
+        term.echo(`Directory: ${currentPath} \n`);
+
+        if (args.length === 0) {
+            term.echo('Empty');
+            return;
+        }
+
+        args.forEach(element => {
+            term.echo(`${element.isDir ? '<DIR>' : '     '} ${element.filePath.split("/").at(-1)}`);
+        });
+    }
+    function handleError(error) {
+        if (error.eventData) {
+            term.echo(error.eventData);
+        }
     }
 
     let term = $('body').terminal({
         ping: function () { this.echo('pong') },
         cd: async function (path) {
 
-            os.call('changeDir', currentPath + path, (res) => res.sender == "system" && handleDirectoryChange(res.return))
-        }
+            os.call('changeDir', currentPath + "/" + path, (res) => handleDirectoryChange(res.eventData))
+        },
+        ls: async function () {
+            os.call('filesInDir', currentPath, (res) => printToConsole(res.eventData));
+        },
+        mkdir: async function (name) {
+            os.call('mkdir', {
+                directoryPath: currentPath,
+                name: name
+            }, (res) => handleError(res))
+        },
+        rm: async function (dir) {
+            os.call('rmdir', currentPath + "/" + dir, res => handleError(res))
+        },
+        touch: async function (name) {
+            os.call('touch', { directoryPath: currentPath, name: name }, res => handleError(res))
+        },
     }, {
         greetings: '<Thijmen OS command line interface> \n',
         name: 'Thijmen OS',
-        prompt: `${currentPath}>`,
+        prompt: `${currentPath}/>`,
     });
 </script>

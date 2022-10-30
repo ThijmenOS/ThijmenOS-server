@@ -74,16 +74,6 @@
 
     document.getElementById("back-arrow").onclick = () => handleBackButton();
 
-
-    window.addEventListener('message', (event) => {
-        handleExternalData(event.data)
-    });
-    function handleExternalData(data) {
-        if (data.return == "selectFile") {
-            explorerMode = "sendData"
-            target = data.sender;
-        }
-    }
     function handleBackButton() {
         if (pathHistory.length <= 1) return
         pathHistory.pop();
@@ -115,7 +105,7 @@
     function getDirs(filePath = "") {
         $("#main-files").empty();
 
-        os.call('filesInDir', filePath, (res) => res.sender == "system" && handleDirResponse(res.return))
+        os.call('filesInDir', filePath, (res) => handleDirResponse(res.eventData))
     }
     function openFileOrDir(filePath = "", isDir) {
         if (isDir == null) {
