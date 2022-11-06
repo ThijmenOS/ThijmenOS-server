@@ -4,22 +4,12 @@ import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
 import { Mkdir, Path } from "@common/FileSystem";
 
+import { computeTargetDir } from "../helpers/computeTargetDir";
+
 @injectable()
 class FileSystemController implements IFileSystemController {
-  private readonly baseDir: string = "userfiles\\";
-
-  public computeTargetDir(dir: string): string {
-    let targetDir = path.join(this.baseDir, dir);
-
-    if (targetDir.indexOf(this.baseDir) !== 0) {
-      return "";
-    }
-
-    return targetDir;
-  }
-
   public getFilesInDir(dir: string) {
-    let targetDir = this.computeTargetDir(dir);
+    let targetDir = computeTargetDir(dir);
 
     let files = fs.readdirSync(targetDir);
     let ret = new Array<any>();
@@ -37,13 +27,13 @@ class FileSystemController implements IFileSystemController {
   }
 
   public readFile(dir: string) {
-    let targetFile = this.computeTargetDir(dir);
+    let targetFile = computeTargetDir(dir);
 
     return fs.readFileSync(targetFile, "utf8");
   }
 
   public dirExists(dir: string): string {
-    let targetDir = this.computeTargetDir(dir);
+    let targetDir = computeTargetDir(dir);
     let normalised = path.normalize(targetDir);
     if (!fs.existsSync(normalised)) return "non-existant";
 
@@ -57,7 +47,7 @@ class FileSystemController implements IFileSystemController {
   }
 
   public makeDirectory(props: Mkdir): string | null {
-    let targetDir = this.computeTargetDir(props.directoryPath);
+    let targetDir = computeTargetDir(props.directoryPath);
     console.log(props);
 
     if (fs.existsSync(targetDir)) {
@@ -71,7 +61,7 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
   public makeFile(props: Mkdir): string | null {
-    let targetDir = this.computeTargetDir(props.directoryPath);
+    let targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
       const newFile = targetDir + "/" + props.name;
@@ -85,7 +75,7 @@ class FileSystemController implements IFileSystemController {
   }
 
   public removeDirectory(props: Path): string | null {
-    let targetDir = this.computeTargetDir(props);
+    let targetDir = computeTargetDir(props);
 
     console.log(targetDir);
 

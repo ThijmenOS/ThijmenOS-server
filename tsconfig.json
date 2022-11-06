@@ -5,7 +5,8 @@
     "outDir": "./dist",
     "baseUrl": "./src/",
     "paths": {
-      "@common/*": ["../../javascriptOS-common/types/*"]
+      "@common/*": ["../../javascriptOS-common/types/*"],
+      "@controllers/*": ["controllers/*"]
     },
     "strict": true,
     "esModuleInterop": true,

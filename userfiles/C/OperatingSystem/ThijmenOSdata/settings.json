@@ -5,36 +5,40 @@
     "storage": {}
   },
   "personalisation": {
-    "background": {}
+    "background": "C/Desktop/background-test.webp"
   },
   "apps": {
     "installedApps": [
       {
+        "applicationIdentifier": "1",
         "title": "Explorer",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
         "exeLocation": "C/ProgramFiles/fileexplorer/file-explorer.html",
         "mimeTypes": []
       },
       {
+        "applicationIdentifier": "2",
         "title": "NoteBlock",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
         "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
-        "mimeTypes": ["txt", "json", "html"]
+        "mimeTypes": [
+          "txt",
+          "json",
+          "html"
+        ]
       },
       {
+        "applicationIdentifier": "3",
         "title": "vsCode",
         "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
         "exeLocation": "C/ProgramFiles/vscode/vscode.html",
-        "mimeTypes": ["txt"]
+        "mimeTypes": [
+          "txt"
+        ]
       }
     ],
     "defaultApps": {
-      "txt": {
-        "title": "NoteBlock",
-        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
-        "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
-        "mimeTypes": ["txt", "json", "html"]
-      }
+      "txt": "2"
     }
   },
   "accounts": {}

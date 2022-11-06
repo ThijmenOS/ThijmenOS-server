@@ -1,19 +1,21 @@
-import BaseHandling from "./handlingFunctions/baseHandling.js";
+import FilesystemHandling from "./handlingFunctions/filesystem.js";
 
-let handling = new BaseHandling();
+class Terminal {
+  filesystem = new FilesystemHandling(this.terminal);
 
-export default terminal = $("body").terminal(
-  {
-    ping: function () {
-      this.echo("pong");
-    },
-    cd: async function (path) {
-      handling.filesystem.cdCommand(path);
-    },
-  },
-  {
-    greetings: "<Thijmen OS command line interface> \n",
-    name: "Thijmen OS",
-    prompt: `${currentPath}>`,
+  constructor() {
+    this.terminal = $("body").terminal(
+      {
+        ping: () => this.echo("pong"),
+        ...this.filesystem.commandDefenitions,
+      },
+      {
+        greetings: "<Thijmen OS command line interface> \n",
+        name: "Thijmen OS",
+        prompt: "C>",
+      }
+    );
   }
-);
+}
+
+export default Terminal;

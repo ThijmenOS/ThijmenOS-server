@@ -1,21 +1,56 @@
 import terminal from "../terminal.js";
+import OperatingSystem from "./operatingSystem.js";
 
-class filesystemHandling {
-  os;
-
-  constructor(os) {
-    this.os = os;
+class FilesystemHandling extends OperatingSystem {
+  constructor(terminal) {
+    super();
+    this.terminal = terminal;
   }
 
+  commandDefenitions = {
+    cd: (path) => this.cdCommand(path),
+    ls: () => this.lsCommand(),
+    mkdir: (name) => this.mkdirCommand(name),
+    rm: (dir) => this.rmCommand(dir),
+    touch: (name) => this.touchCommand(name),
+  };
+
   basePath = "C/";
-  currentPath = basePath;
+  currentPath = this.basePath;
 
   //commands
   cdCommand(path) {
-    os.call(
+    this.os.call(
       "changeDir",
-      currentPath + path,
-      (res) => res.sender == "system" && handleDirectoryChange(res.return)
+      this.currentPath + path,
+      (res) => res.sender == "system" && this.handleDirectoryChange(res.return)
+    );
+  }
+  lsCommand() {
+    this.os.call("filesInDir", this.currentPath, (res) =>
+      this.printDirectories(res.eventData)
+    );
+  }
+  mkdirCommand(name) {
+    this.os.call(
+      "mkdir",
+      {
+        directoryPath: this.currentPath,
+        name: name,
+      },
+      (res) => this.handleError(res)
+    );
+  }
+  rmCommand(dir) {
+    this.os.call("rmdir", this.currentPath + "/" + dir, (res) =>
+      this.andleError(res)
+    );
+  }
+  touchCommand(name) {
+    this.os.call(
+      "touch",
+      { directoryPath: this.currentPath, name: name },
+      (res) => this.handleError(res)
     );
   }
 
@@ -23,13 +58,29 @@ class filesystemHandling {
 
   handleDirectoryChange(path) {
     if (path == "non-existant") {
-      term.echo("Provided path does not exist");
+      this.terminal.echo("Provided path does not exist");
       return;
     }
 
-    currentPath = path;
-    terminal.set_prompt(currentPath + ">");
+    this.currentPath = path;
+    this.terminal.set_prompt(this.currentPath + "/>");
+  }
+  printDirectories(args) {
+    this.terminal.echo(`Directory: ${this.currentPath} \n`);
+
+    if (args.length === 0) {
+      this.terminal.echo("Empty");
+      return;
+    }
+
+    args.forEach((element) => {
+      this.terminal.echo(
+        `${element.isDir ? "<DIR>" : "     "} ${element.filePath
+          .split("/")
+          .at(-1)}`
+      );
+    });
   }
 }
 
-export default filesystemHandling;
+export default FilesystemHandling;

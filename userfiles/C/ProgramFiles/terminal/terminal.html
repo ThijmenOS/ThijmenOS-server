@@ -11,10 +11,16 @@
 </body>
 
 <script>
+
     let os = new OS();
     let basePath = 'C'
     let currentPath = basePath;
 
+    function handleError(error) {
+        if (error.eventData) {
+            term.echo(error.eventData);
+        }
+    }
     function handleDirectoryChange(path) {
         if (path == "non-existant") {
             term.echo("Provided path does not exist");
@@ -35,11 +41,6 @@
         args.forEach(element => {
             term.echo(`${element.isDir ? '<DIR>' : '     '} ${element.filePath.split("/").at(-1)}`);
         });
-    }
-    function handleError(error) {
-        if (error.eventData) {
-            term.echo(error.eventData);
-        }
     }
 
     let term = $('body').terminal({
@@ -63,7 +64,20 @@
         touch: async function (name) {
             os.call('touch', { directoryPath: currentPath, name: name }, res => handleError(res))
         },
+        stbg: async function (...args) {
+            //TODO: error handling for not image types
+            const options = $.terminal.parse_options(args);
+
+            if (options.path) {
+                os.call('changeBackground', options.path);
+                return;
+            }
+
+            os.call('changeBackground', currentPath + "/" + options._[0])
+
+        }
     }, {
+        checkArity: false,
         greetings: '<Thijmen OS command line interface> \n',
         name: 'Thijmen OS',
         prompt: `${currentPath}/>`,
