@@ -1,4 +1,4 @@
-import { Path } from "@common/FileSystem";
+import { Path } from "javascriptos-common/types";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
 import { Router } from "express";

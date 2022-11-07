@@ -1,4 +1,4 @@
-import { Path } from "@common/FileSystem";
+import { Path } from "javascriptos-common/types";
 
 interface ISettingsController {
   SetBackground(ImagePath: Path): Promise<void>;

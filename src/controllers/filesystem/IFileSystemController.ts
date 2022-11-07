@@ -1,4 +1,4 @@
-import { Mkdir, Path } from "@common/FileSystem";
+import { Mkdir, Path } from "javascriptos-common/types";
 
 export default interface IFileSystemController {
   getFilesInDir(dir: string): any;

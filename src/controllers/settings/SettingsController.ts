@@ -1,6 +1,6 @@
 import fs from "fs";
 import ISettingsController from "./ISettingsController";
-import { OSSettings } from "@common/Settings";
+import { OSSettings } from "javascriptos-common/types";
 import { injectable } from "inversify";
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
