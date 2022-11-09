@@ -4,7 +4,7 @@ import FileSystemController from "../controllers/filesystem/FileSystemController
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
-import { Mkdir, Path } from "@common/FileSystem";
+import { Mkdir, Path } from "@thijmenos/common/types";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =

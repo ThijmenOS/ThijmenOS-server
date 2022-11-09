@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
-import { Mkdir, Path } from "@common/FileSystem";
+import { Mkdir, Path } from "@thijmenos/common/types";
 
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
