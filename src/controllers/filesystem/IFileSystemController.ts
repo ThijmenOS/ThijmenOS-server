@@ -1,4 +1,4 @@
-import { Mkdir, Path } from "javascriptos-common/types";
+import { Mkdir, Path } from "@thijmenos/common/types";
 
 export default interface IFileSystemController {
   getFilesInDir(dir: string): any;

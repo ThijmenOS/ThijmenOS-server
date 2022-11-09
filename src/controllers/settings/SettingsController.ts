@@ -1,6 +1,6 @@
 import fs from "fs";
 import ISettingsController from "./ISettingsController";
-import { OSSettings } from "javascriptos-common/types";
+import { OSSettings } from "@thijmenos/common/types";
 import { injectable } from "inversify";
 import { computeTargetDir } from "../helpers/computeTargetDir";
 

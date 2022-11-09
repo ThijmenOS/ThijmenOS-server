@@ -1,4 +1,4 @@
-import { Path } from "javascriptos-common/types";
+import { Path } from "@thijmenos/common/types";
 
 interface ISettingsController {
   SetBackground(ImagePath: Path): Promise<void>;
