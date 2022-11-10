@@ -1,8 +1,7 @@
 import fs from "fs";
 import ISettingsController from "./ISettingsController";
-import { OSSettings } from "@thijmenos/common/types";
+import { OSSettings } from "@thijmenos/common";
 import { injectable } from "inversify";
-import { computeTargetDir } from "../helpers/computeTargetDir";
 
 @injectable()
 class SettingsController implements ISettingsController {

@@ -2,17 +2,17 @@ import path from "path";
 import fs from "fs";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
-import { Mkdir, Path } from "@thijmenos/common/types";
+import { Directory, Mkdir, Path } from "@thijmenos/common";
 
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
 @injectable()
 class FileSystemController implements IFileSystemController {
-  public getFilesInDir(dir: string) {
-    let targetDir = computeTargetDir(dir);
+  public getFilesInDir(dir: string): Array<Directory> {
+    const targetDir = computeTargetDir(dir);
 
-    let files = fs.readdirSync(targetDir);
-    let ret = new Array<any>();
+    const files = fs.readdirSync(targetDir);
+    const ret = new Array<Directory>();
 
     files.forEach((file) =>
       ret.push({
@@ -26,28 +26,28 @@ class FileSystemController implements IFileSystemController {
     return ret;
   }
 
-  public readFile(dir: string) {
-    let targetFile = computeTargetDir(dir);
+  public readFile(dir: string): string {
+    const targetFile = computeTargetDir(dir);
 
     return fs.readFileSync(targetFile, "utf8");
   }
 
   public dirExists(dir: string): string {
-    let targetDir = computeTargetDir(dir);
-    let normalised = path.normalize(targetDir);
+    const targetDir = computeTargetDir(dir);
+    const normalised = path.normalize(targetDir);
     if (!fs.existsSync(normalised)) return "non-existant";
 
-    let cleaned = normalised.split("\\");
+    const cleaned = normalised.split("\\");
     cleaned.shift();
 
-    if (cleaned.at(-1) == "") cleaned.pop();
+    if (cleaned.at(-1) === "") cleaned.pop();
     if (cleaned.length <= 0) return "non-existant";
 
     return cleaned.join("/");
   }
 
   public makeDirectory(props: Mkdir): string | null {
-    let targetDir = computeTargetDir(props.directoryPath);
+    const targetDir = computeTargetDir(props.directoryPath);
     console.log(props);
 
     if (fs.existsSync(targetDir)) {
@@ -61,7 +61,7 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
   public makeFile(props: Mkdir): string | null {
-    let targetDir = computeTargetDir(props.directoryPath);
+    const targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
       const newFile = targetDir + "/" + props.name;
@@ -75,7 +75,7 @@ class FileSystemController implements IFileSystemController {
   }
 
   public removeDirectory(props: Path): string | null {
-    let targetDir = computeTargetDir(props);
+    const targetDir = computeTargetDir(props);
 
     console.log(targetDir);
 
