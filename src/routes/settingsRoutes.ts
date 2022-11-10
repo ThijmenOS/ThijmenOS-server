@@ -1,4 +1,4 @@
-import { Path } from "@thijmenos/common/types";
+import { Path } from "@thijmenos/common";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
 import { Router } from "express";

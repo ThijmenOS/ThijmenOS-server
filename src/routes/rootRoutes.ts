@@ -15,20 +15,20 @@ class RootRoutes extends Route implements IRouterConfig {
 
   get routes(): Router {
     this._router.get("/readRegisteredApplications", (req, res) => {
-      let rawFile = this._fileSystemController.readFile(
+      const rawFile = this._fileSystemController.readFile(
         "C/OperatingSystem/ThijmenOSdata/applications.json"
       )!;
       res.send(JSON.parse(rawFile));
     });
 
     this._router.get("/readSettings", (req, res) => {
-      let rawFile = this._fileSystemController.readFile(
+      const rawFile = this._fileSystemController.readFile(
         "C/OperatingSystem/ThijmenOSdata/settings.json"
       )!;
       res.send(JSON.parse(rawFile));
     });
     this._router.get("/changeDirectory", (req, res) => {
-      let result = this._fileSystemController.dirExists(
+      const result = this._fileSystemController.dirExists(
         req.query.path as string
       );
       res.send(result);

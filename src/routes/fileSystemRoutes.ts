@@ -4,7 +4,7 @@ import FileSystemController from "../controllers/filesystem/FileSystemController
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
-import { Mkdir, Path } from "@thijmenos/common/types";
+import { Mkdir, Path } from "@thijmenos/common";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =
@@ -16,37 +16,37 @@ class FileSystemRoutes extends Route implements IRouterConfig {
 
   public get routes(): Router {
     this._router.get("/showUserFiles", (req, res) => {
-      let requestedDir: string = (req.query.dir as string) || "";
+      const requestedDir: string = (req.query.dir as string) || "";
 
-      let result = this._fileSystemController.getFilesInDir(requestedDir);
+      const result = this._fileSystemController.getFilesInDir(requestedDir);
 
       res.send(result);
     });
     this._router.get("/openUserFile", (req, res) => {
-      let requestedFile = req.query.file as string;
+      const requestedFile = req.query.file as string;
 
-      let result = this._fileSystemController.readFile(requestedFile);
+      const result = this._fileSystemController.readFile(requestedFile);
 
       res.send(result);
     });
     this._router.post("/makeDirectory", (req, res) => {
-      let bodyQuery: Mkdir = req.body;
+      const bodyQuery: Mkdir = req.body;
 
-      let result = this._fileSystemController.makeDirectory(bodyQuery);
+      const result = this._fileSystemController.makeDirectory(bodyQuery);
 
       res.send(result);
     });
     this._router.post("/makeFile", (req, res) => {
-      let bodyQuery: Mkdir = req.body;
-      let result = this._fileSystemController.makeFile(bodyQuery);
+      const bodyQuery: Mkdir = req.body;
+      this._fileSystemController.makeFile(bodyQuery);
 
-      res.send;
+      res.sendStatus(200);
     });
 
     this._router.post("/removeDirectory", (req, res) => {
-      let bodyQuery: { Path: Path } = req.body;
+      const bodyQuery: { Path: Path } = req.body;
 
-      let result = this._fileSystemController.removeDirectory(bodyQuery.Path);
+      const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
 
       res.send(result);
     });
