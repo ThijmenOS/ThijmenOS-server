@@ -5,6 +5,7 @@ import IFileSystemController from "../controllers/filesystem/IFileSystemControll
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
 import { Mkdir, Path } from "@thijmenos/common";
+import { response } from "../types/responseType";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =
@@ -20,21 +21,36 @@ class FileSystemRoutes extends Route implements IRouterConfig {
 
       const result = this._fileSystemController.getFilesInDir(requestedDir);
 
-      res.send(result);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
     this._router.get("/openUserFile", (req, res) => {
       const requestedFile = req.query.file as string;
 
       const result = this._fileSystemController.readFile(requestedFile);
 
-      res.send(result);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
     this._router.post("/makeDirectory", (req, res) => {
       const bodyQuery: Mkdir = req.body;
 
       const result = this._fileSystemController.makeDirectory(bodyQuery);
 
-      res.send(result);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
     this._router.post("/makeFile", (req, res) => {
       const bodyQuery: Mkdir = req.body;
@@ -48,7 +64,12 @@ class FileSystemRoutes extends Route implements IRouterConfig {
 
       const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
 
-      res.send(result);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
 
     return this._router;

@@ -5,6 +5,7 @@ import { Router } from "express";
 import javascriptOs from "../../inversify.config";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
+import { response } from "types/responseType";
 
 class SettingsRoutes extends Route implements IRouterConfig {
   private readonly _settingsController: ISettingsController =
@@ -22,12 +23,22 @@ class SettingsRoutes extends Route implements IRouterConfig {
 
       const background = await this._settingsController.GetBackground();
 
-      res.send(background);
+      const response: response = {
+        data: background,
+        status: 200,
+      };
+
+      res.send(response);
     });
     this._router.get("/getBackground", async (req, res) => {
       const result = await this._settingsController.GetBackground();
 
-      res.send(result);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
 
     return this._router;
