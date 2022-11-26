@@ -1,0 +1,14 @@
+name: Development
+
+on:
+  pull_request:
+    branches: ["production"]
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+jobs:
+  publish:
+    uses: thijmenos/thijmenos-common/.github/workflows/develop.yml@production
