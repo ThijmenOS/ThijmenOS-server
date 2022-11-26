@@ -11,30 +11,31 @@
     "installedApps": [
       {
         "applicationIdentifier": "1",
-        "title": "Explorer",
+        "name": "Explorer",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
-        "exeLocation": "C/ProgramFiles/fileexplorer/file-explorer.html",
+        "exeLocation": "C/ProgramFiles/fileexplorer/",
         "mimeTypes": []
       },
       {
         "applicationIdentifier": "2",
-        "title": "NoteBlock",
+        "name": "NoteBlock",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
-        "exeLocation": "C/ProgramFiles/noteblock/note-block.html",
-        "mimeTypes": [
-          "txt",
-          "json",
-          "html"
-        ]
+        "exeLocation": "C/ProgramFiles/noteblock/",
+        "mimeTypes": ["txt", "json", "html"]
       },
       {
         "applicationIdentifier": "3",
-        "title": "vsCode",
+        "name": "vsCode",
         "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
-        "exeLocation": "C/ProgramFiles/vscode/vscode.html",
-        "mimeTypes": [
-          "txt"
-        ]
+        "exeLocation": "C/ProgramFiles/vscode/",
+        "mimeTypes": []
+      },
+      {
+        "applicationIdentifier": "4",
+        "name": "terminal",
+        "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
+        "exeLocation": "C/ProgramFiles/terminal/",
+        "mimeTypes": []
       }
     ],
     "defaultApps": {

@@ -1,1 +1,5 @@
-<meta name="exeLocation" content="C/ProgramFiles/terminal/terminal.html" />
+{
+  "name": "terminal",
+  "icon": "C/ProgramFiles/terminal/terminal-icon.svg",
+  "exeLocation": "C/ProgramFiles/terminal/"
+}

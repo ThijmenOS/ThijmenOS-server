@@ -1,4 +1,4 @@
-import { Directory, Mkdir, Path } from "@thijmenos/common";
+import { Directory, Mkdir, Path } from "@thijmen-os/common";
 
 export default interface IFileSystemController {
   getFilesInDir(dir: string): Array<Directory>;

@@ -1,12 +1,12 @@
 import fs from "fs";
 import ISettingsController from "./ISettingsController";
-import { OSSettings } from "@thijmenos/common";
+import { OSSettings } from "@thijmen-os/common";
 import { injectable } from "inversify";
 
 @injectable()
 class SettingsController implements ISettingsController {
   private readonly settingsLocation =
-    "userfiles/C/OperatingSystem/ThijmenOSData/settings.json";
+    "userfiles/C/OperatingSystem/ThijmenOsData/settings.json";
 
   private async ReadSettings(): Promise<OSSettings> {
     const raw = fs.readFileSync(this.settingsLocation, "utf8");
