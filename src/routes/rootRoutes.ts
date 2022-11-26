@@ -17,7 +17,7 @@ class RootRoutes extends Route implements IRouterConfig {
   get routes(): Router {
     this._router.get("/readRegisteredApplications", (req, res) => {
       const rawFile = this._fileSystemController.readFile(
-        "C/OperatingSystem/ThijmenOSdata/applications.json"
+        "C/OperatingSystem/ThijmenOsData/applications.json"
       )!;
 
       const response: response = {
@@ -30,7 +30,7 @@ class RootRoutes extends Route implements IRouterConfig {
 
     this._router.get("/readSettings", (req, res) => {
       const rawFile = this._fileSystemController.readFile(
-        "C/OperatingSystem/ThijmenOSdata/settings.json"
+        "C/OperatingSystem/ThijmenOsData/settings.json"
       )!;
 
       const response: response = {

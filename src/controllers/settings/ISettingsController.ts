@@ -1,4 +1,4 @@
-import { Path } from "@thijmenos/common";
+import { Path } from "@thijmen-os/common";
 
 interface ISettingsController {
   SetBackground(ImagePath: Path): Promise<void>;

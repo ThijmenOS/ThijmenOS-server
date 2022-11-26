@@ -1,1 +1,5 @@
-<meta name="exeLocation" content="C/ProgramFiles/vscode/vscode.html" />
+{
+  "name": "vs code",
+  "icon": "C/ProgramFiles/vscode/app-icon.svg",
+  "exeLocation": "C/ProgramFiles/vscode/"
+}

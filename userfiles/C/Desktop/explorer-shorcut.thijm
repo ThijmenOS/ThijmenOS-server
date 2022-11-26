@@ -1,1 +1,5 @@
-<meta name="exeLocation" content="C/ProgramFiles/fileexplorer/file-explorer.html" />
+{
+  "name": "explorer",
+  "icon": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
+  "exeLocation": "C/ProgramFiles/fileexplorer/"
+}

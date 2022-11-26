@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
-import { Directory, Mkdir, Path } from "@thijmenos/common";
+import { Directory, Mkdir, Path } from "@thijmen-os/common";
 
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
@@ -48,7 +48,6 @@ class FileSystemController implements IFileSystemController {
 
   public makeDirectory(props: Mkdir): string | null {
     const targetDir = computeTargetDir(props.directoryPath);
-    console.log(props);
 
     if (fs.existsSync(targetDir)) {
       const newDir = targetDir + "/" + props.name;

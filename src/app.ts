@@ -11,6 +11,7 @@ app.use(
     extended: true,
   })
 );
+app.use(express.json());
 app.use("/static", express.static("userfiles/"));
 new BaseRoutes(app).defineRoutes();
 
