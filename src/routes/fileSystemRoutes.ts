@@ -54,9 +54,14 @@ class FileSystemRoutes extends Route implements IRouterConfig {
     });
     this._router.post("/makeFile", (req, res) => {
       const bodyQuery: Mkdir = req.body;
-      this._fileSystemController.makeFile(bodyQuery);
+      const result = this._fileSystemController.makeFile(bodyQuery);
 
-      res.sendStatus(200);
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      res.send(response);
     });
 
     this._router.post("/removeDirectory", (req, res) => {
