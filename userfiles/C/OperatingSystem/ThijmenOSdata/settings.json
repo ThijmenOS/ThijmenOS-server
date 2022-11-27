@@ -34,7 +34,7 @@
         "applicationIdentifier": "4",
         "name": "terminal",
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
-        "exeLocation": "C/ProgramFiles/terminal/",
+        "exeLocation": "C/ProgramFiles/terminal/dist",
         "mimeTypes": []
       }
     ],
