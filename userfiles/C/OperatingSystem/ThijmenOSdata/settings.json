@@ -23,7 +23,7 @@
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
         "exeLocation": "C/ProgramFiles/noteblock/",
         "mimeTypes": ["txt", "json", "html"],
-        "permissions": []
+        "permissions": [0]
       },
       {
         "applicationIdentifier": "3",
