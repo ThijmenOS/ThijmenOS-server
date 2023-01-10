@@ -1,5 +1,5 @@
 {
   "name": "explorer",
-  "icon": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
+  "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
   "exeLocation": "C/ProgramFiles/fileexplorer/dist/"
 }
