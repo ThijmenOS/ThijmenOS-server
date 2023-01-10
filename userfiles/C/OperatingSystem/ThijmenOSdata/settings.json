@@ -5,7 +5,7 @@
     "storage": {}
   },
   "personalisation": {
-    "background": "C/images/wallpapers/02010-4.webp"
+    "background": "C/images/wallpapers/SnowySunrise.webp"
   },
   "apps": {
     "installedApps": [
@@ -14,28 +14,38 @@
         "name": "Explorer",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
         "exeLocation": "C/ProgramFiles/fileexplorer/",
-        "mimeTypes": []
+        "mimeTypes": [],
+        "permissions": [
+          0
+        ]
       },
       {
         "applicationIdentifier": "2",
         "name": "NoteBlock",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
         "exeLocation": "C/ProgramFiles/noteblock/",
-        "mimeTypes": ["txt", "json", "html"]
+        "mimeTypes": [
+          "txt",
+          "json",
+          "html"
+        ],
+        "permissions": []
       },
       {
         "applicationIdentifier": "3",
         "name": "vsCode",
         "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
         "exeLocation": "C/ProgramFiles/vscode/",
-        "mimeTypes": []
+        "mimeTypes": [],
+        "permissions": []
       },
       {
         "applicationIdentifier": "4",
         "name": "terminal",
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
         "exeLocation": "C/ProgramFiles/terminal/dist",
-        "mimeTypes": []
+        "mimeTypes": [],
+        "permissions": []
       }
     ],
     "defaultApps": {

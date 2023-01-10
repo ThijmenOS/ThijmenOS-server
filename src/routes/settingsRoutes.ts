@@ -1,4 +1,4 @@
-import { Path } from "@thijmen-os/common";
+import { Path, PermissionRequestDto } from "@thijmen-os/common";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
 import { Router } from "express";
@@ -37,6 +37,50 @@ class SettingsRoutes extends Route implements IRouterConfig {
         data: result,
         status: 200,
       };
+
+      res.send(response);
+    });
+    this._router.post("/grantPermission", async (req, res) => {
+      const reqbody: PermissionRequestDto = req.body;
+
+      const result = await this._settingsController.GrantPermission(reqbody);
+
+      const response: response = {
+        data: result,
+        status: 200,
+      };
+
+      if (!result) response.status = 404;
+
+      res.send(response);
+    });
+    this._router.delete("/grantPermission", async (req, res) => {
+      const reqbody: PermissionRequestDto = req.body;
+
+      const result = await this._settingsController.RevokePermission(reqbody);
+
+      const response: response = {
+        data: result,
+        status: 204,
+      };
+
+      if (!result) response.status = 404;
+
+      res.send(response);
+    });
+    this._router.delete("/allPermissions", async (req, res) => {
+      const applicationId: { applicationId: string } = req.body;
+
+      const result = await this._settingsController.RevokeAllPermissions(
+        applicationId.applicationId
+      );
+
+      const response: response = {
+        data: result,
+        status: 204,
+      };
+
+      if (!result) response.status = 404;
 
       res.send(response);
     });
