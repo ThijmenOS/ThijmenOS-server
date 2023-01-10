@@ -13,22 +13,16 @@
         "applicationIdentifier": "1",
         "name": "Explorer",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
-        "exeLocation": "C/ProgramFiles/fileexplorer/",
+        "exeLocation": "C/ProgramFiles/fileexplorer/dist/",
         "mimeTypes": [],
-        "permissions": [
-          0
-        ]
+        "permissions": [0]
       },
       {
         "applicationIdentifier": "2",
         "name": "NoteBlock",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
         "exeLocation": "C/ProgramFiles/noteblock/",
-        "mimeTypes": [
-          "txt",
-          "json",
-          "html"
-        ],
+        "mimeTypes": ["txt", "json", "html"],
         "permissions": []
       },
       {
@@ -45,7 +39,7 @@
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
         "exeLocation": "C/ProgramFiles/terminal/dist",
         "mimeTypes": [],
-        "permissions": []
+        "permissions": [0]
       }
     ],
     "defaultApps": {
