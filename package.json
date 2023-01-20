@@ -9,6 +9,11 @@
     "lint": "npx eslint src",
     "test": "jest --passWithNoTests"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "**/userfiles/**"
+    ]
+  },
   "keywords": [],
   "author": "Thijmen Brand",
   "license": "ISC",

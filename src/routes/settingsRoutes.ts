@@ -42,7 +42,6 @@ class SettingsRoutes extends Route implements IRouterConfig {
     });
     this._router.post("/grantPermission", async (req, res) => {
       const reqbody: PermissionRequestDto = req.body;
-
       const result = await this._settingsController.GrantPermission(reqbody);
 
       const response: response = {
