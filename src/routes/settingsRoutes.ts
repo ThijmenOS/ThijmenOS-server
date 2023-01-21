@@ -5,7 +5,7 @@ import { Router } from "express";
 import javascriptOs from "../../inversify.config";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
-import { response } from "types/responseType";
+import { HttpStatus, Response } from "../types/responseType";
 
 class SettingsRoutes extends Route implements IRouterConfig {
   private readonly _settingsController: ISettingsController =
@@ -23,33 +23,25 @@ class SettingsRoutes extends Route implements IRouterConfig {
 
       const background = await this._settingsController.GetBackground();
 
-      const response: response = {
-        data: background,
-        status: 200,
-      };
-
-      res.send(response);
+      res.send(
+        new Response<string>({ data: background, status: HttpStatus.created })
+      );
     });
     this._router.get("/getBackground", async (req, res) => {
       const result = await this._settingsController.GetBackground();
 
-      const response: response = {
-        data: result,
-        status: 200,
-      };
-
-      res.send(response);
+      res.send(new Response<string>({ data: result, status: HttpStatus.ok }));
     });
     this._router.post("/grantPermission", async (req, res) => {
       const reqbody: PermissionRequestDto = req.body;
       const result = await this._settingsController.GrantPermission(reqbody);
 
-      const response: response = {
+      const response = new Response<boolean>({
         data: result,
-        status: 200,
-      };
+        status: HttpStatus.created,
+      });
 
-      if (!result) response.status = 404;
+      if (!result) response.status = HttpStatus.notFound;
 
       res.send(response);
     });
@@ -58,12 +50,12 @@ class SettingsRoutes extends Route implements IRouterConfig {
 
       const result = await this._settingsController.RevokePermission(reqbody);
 
-      const response: response = {
+      const response = new Response<boolean>({
         data: result,
-        status: 204,
-      };
+        status: HttpStatus.ok,
+      });
 
-      if (!result) response.status = 404;
+      if (!result) response.status = HttpStatus.notFound;
 
       res.send(response);
     });
@@ -74,12 +66,12 @@ class SettingsRoutes extends Route implements IRouterConfig {
         applicationId.applicationId
       );
 
-      const response: response = {
+      const response = new Response<boolean>({
         data: result,
-        status: 204,
-      };
+        status: HttpStatus.noContent,
+      });
 
-      if (!result) response.status = 404;
+      if (!result) response.status = HttpStatus.notFound;
 
       res.send(response);
     });

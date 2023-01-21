@@ -5,7 +5,7 @@
     "storage": {}
   },
   "personalisation": {
-    "background": "C/images/wallpapers/02010-4.webp"
+    "background": "C/images/wallpapers/SnowySunrise.webp"
   },
   "apps": {
     "installedApps": [
@@ -15,23 +15,15 @@
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
         "exeLocation": "C/ProgramFiles/fileexplorer/dist/",
         "mimeTypes": [],
-        "permissions": [
-          0
-        ]
+        "permissions": [0]
       },
       {
         "applicationIdentifier": "2",
         "name": "NoteBlock",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
         "exeLocation": "C/ProgramFiles/noteblock/",
-        "mimeTypes": [
-          "txt",
-          "json",
-          "html"
-        ],
-        "permissions": [
-          0
-        ]
+        "mimeTypes": ["txt", "json", "html"],
+        "permissions": [0]
       },
       {
         "applicationIdentifier": "3",
@@ -47,9 +39,7 @@
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
         "exeLocation": "C/ProgramFiles/terminal/dist",
         "mimeTypes": [],
-        "permissions": [
-          0
-        ]
+        "permissions": [0]
       },
       {
         "applicationIdentifier": "5",
@@ -64,5 +54,20 @@
       "txt": "2"
     }
   },
-  "accounts": {}
+  "accounts": [
+    {
+      "userId": "1",
+      "username": "Thijmen",
+      "email": "Thijmen@ik.nu",
+      "password": "Welkom01",
+      "pincode": "12345"
+    },
+    {
+      "userId": "2",
+      "username": "Aukje",
+      "email": "Aukje@ik.nu",
+      "password": "Aukje2002",
+      "pincode": "1357"
+    }
+  ]
 }
