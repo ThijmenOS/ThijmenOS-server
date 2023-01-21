@@ -5,6 +5,7 @@ import {
   OSSettings,
   Permissions,
   PermissionRequestDto,
+  User,
 } from "@thijmen-os/common";
 import { injectable } from "inversify";
 
@@ -101,6 +102,22 @@ class SettingsController implements ISettingsController {
     this.WriteSettings(settings);
 
     return true;
+  }
+
+  public async ReadUserSettings(userId: string): Promise<any> {
+    console.log("not implemented yet");
+    throw new Error("not implemented yet");
+  }
+
+  public async ReadGlobalSettings(userId: string): Promise<OSSettings> {
+    console.log("not implemented yet");
+    throw new Error("not implemented yet");
+  }
+
+  public async GetAllUsers(): Promise<Array<User>> {
+    const settings: OSSettings = await this.ReadSettings();
+
+    return settings.accounts;
   }
 }
 
