@@ -1,0 +1,1 @@
+NPM package die dient als tussen route. Die heeft alle logica om goed met de kernel te kunnen communiceren. Dan zijn er methoden om met de kernel te communiceren zoals OpenApp of SaveSettings of OpenFile. en dan zijn er events die naar die middleware gaan waar de applicatie naar kan luisteren. zoals. event.on.recourse dan krijg je een verzoek om iets te openen.

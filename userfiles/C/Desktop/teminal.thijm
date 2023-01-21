@@ -1,0 +1,5 @@
+{
+  "name": "terminal",
+  "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
+  "exeLocation": "C/ProgramFiles/terminal/dist"
+}
