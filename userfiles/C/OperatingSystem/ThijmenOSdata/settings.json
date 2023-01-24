@@ -14,7 +14,7 @@
         "name": "Explorer",
         "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
         "exeLocation": "C/ProgramFiles/fileexplorer/dist/",
-        "mimeTypes": [],
+        "mimeTypes": ["dir"],
         "permissions": [0]
       },
       {
@@ -51,7 +51,8 @@
       }
     ],
     "defaultApps": {
-      "txt": "2"
+      "txt": "2",
+      "dir": "1"
     }
   },
   "accounts": [

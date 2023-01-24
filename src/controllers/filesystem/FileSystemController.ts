@@ -76,8 +76,6 @@ class FileSystemController implements IFileSystemController {
   public removeDirectory(props: Path): string | null {
     const targetDir = computeTargetDir(props);
 
-    console.log(targetDir);
-
     if (fs.existsSync(targetDir)) {
       fs.rmSync(targetDir, { recursive: true });
       return null;
