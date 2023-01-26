@@ -62,6 +62,13 @@
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",
       "pincode": "12345"
+    },
+    {
+      "userId": "2",
+      "username": "Aukje",
+      "email": "Aukje@ik.nu",
+      "password": "Welkom01",
+      "pincode": "12345"
     }
   ]
 }
