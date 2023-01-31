@@ -12,42 +12,26 @@
       {
         "applicationIdentifier": "1",
         "name": "Explorer",
-        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsFileExplorer.svg",
-        "exeLocation": "C/ProgramFiles/fileexplorer/dist/",
+        "iconLocation": "C/ProgramFiles/fileexplorer/fileexplorer-icon.svg",
+        "exeLocation": "C/ProgramFiles/fileexplorer/",
         "mimeTypes": ["dir"],
         "permissions": [0]
       },
       {
         "applicationIdentifier": "2",
         "name": "NoteBlock",
-        "iconLocation": "C/OperatingSystem/Icons/ThijmenOsNoteBlock.svg",
+        "iconLocation": "C/ProgramFiles/noteblock/noteblock-icon.svg",
         "exeLocation": "C/ProgramFiles/noteblock/",
         "mimeTypes": ["txt", "json", "html"],
         "permissions": [0]
       },
       {
         "applicationIdentifier": "3",
-        "name": "vsCode",
-        "iconLocation": "C/ProgramFiles/vscode/app-icon.svg",
-        "exeLocation": "C/ProgramFiles/vscode/",
-        "mimeTypes": [],
-        "permissions": []
-      },
-      {
-        "applicationIdentifier": "4",
         "name": "terminal",
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
-        "exeLocation": "C/ProgramFiles/terminal/dist",
+        "exeLocation": "C/ProgramFiles/terminal/",
         "mimeTypes": [],
         "permissions": [0]
-      },
-      {
-        "applicationIdentifier": "5",
-        "name": "settings",
-        "iconLocation": "C/ProgramFiles/settings/application-icon.svg",
-        "exeLocation": "C/ProgramFiles/settings/dist",
-        "mimeTypes": [],
-        "permissions": []
       }
     ],
     "defaultApps": {
