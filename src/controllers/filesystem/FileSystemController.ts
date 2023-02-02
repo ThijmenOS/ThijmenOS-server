@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
-import { Directory, Mkdir, Path } from "@thijmen-os/common";
+import { Access, AccessMap, Directory, Mkdir, Path } from "@thijmen-os/common";
 
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
@@ -26,6 +26,24 @@ class FileSystemController implements IFileSystemController {
     return ret;
   }
 
+  private registerAccess(path: Path, userId: string, access: AccessMap) {
+    //TODO: Make this env variable
+    //TODO: Implement groups
+    const targetFile = computeTargetDir(
+      "C/OperatingSystem/ThijmenOSdata/.access"
+    );
+
+    const rwx: Array<string> = [];
+    Object.keys(access).map((x) =>
+      access[x as Access] ? rwx.push(x.toString()) : rwx.push("-")
+    );
+    const targetPath = path.substring(10).split("\\").join("/");
+
+    const entry = `\n${targetPath}:${userId}${rwx.join("")}:1rwx`;
+
+    fs.appendFileSync(targetFile, entry);
+  }
+
   public readFile(dir: string): string {
     const targetFile = computeTargetDir(dir);
 
@@ -46,7 +64,11 @@ class FileSystemController implements IFileSystemController {
     return cleaned.join("/");
   }
 
-  public makeDirectory(props: Mkdir): string | null {
+  public makeDirectory(
+    props: Mkdir,
+    subjectId: string,
+    accessLevels: AccessMap
+  ): string | null {
     const targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
@@ -54,12 +76,18 @@ class FileSystemController implements IFileSystemController {
       if (fs.existsSync(newDir)) return "Directory already exists!";
 
       fs.mkdirSync(newDir, { recursive: true });
+      this.registerAccess(newDir, subjectId, accessLevels);
+
       return null;
     }
 
     return "Something went wrong";
   }
-  public makeFile(props: Mkdir): string | null {
+  public makeFile(
+    props: Mkdir,
+    subjectId: string,
+    accessLevels: AccessMap
+  ): string | null {
     const targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
@@ -67,6 +95,8 @@ class FileSystemController implements IFileSystemController {
       if (fs.existsSync(newFile)) return "File already exists";
 
       fs.openSync(newFile, "w");
+      this.registerAccess(newFile, subjectId, accessLevels);
+
       return null;
     }
 

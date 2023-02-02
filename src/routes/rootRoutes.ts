@@ -7,13 +7,17 @@ import FileSystemController from "../controllers/filesystem/FileSystemController
 import { HttpStatus, Response } from "../types/responseType";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
-import { OSSettings, User } from "@thijmen-os/common";
+import Root from "../controllers/root/root";
+import { AccessObject, OSSettings, User } from "@thijmen-os/common";
+import RootMethods from "../controllers/root/rootMethods";
+import { AccessObjectMap } from "@thijmen-os/common";
 
 class RootRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =
     javascriptOs.resolve(FileSystemController);
   private readonly _settingsController: ISettingsController =
     javascriptOs.resolve(SettingsController);
+  private readonly _RootController: RootMethods = javascriptOs.resolve(Root);
 
   constructor() {
     super();
@@ -46,6 +50,17 @@ class RootRoutes extends Route implements IRouterConfig {
 
       res.send(
         new Response<Array<User>>({ data: result, status: HttpStatus.ok })
+      );
+    });
+
+    this._router.get("/access", async (req, res) => {
+      const result = this._RootController.readFileAccess();
+
+      res.send(
+        new Response<AccessObjectMap>({
+          data: result,
+          status: HttpStatus.ok,
+        })
       );
     });
 

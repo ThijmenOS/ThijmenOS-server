@@ -4,7 +4,7 @@ import FileSystemController from "../controllers/filesystem/FileSystemController
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
 import IRouterConfig from "./IRouterConfig";
 import Route from "./Route";
-import { Directory, Mkdir, Path } from "@thijmen-os/common";
+import { AccessMap, Directory, Mkdir, Path } from "@thijmen-os/common";
 import { HttpStatus, Response } from "../types/responseType";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
@@ -33,9 +33,14 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       res.send(new Response<string>({ data: result, status: HttpStatus.ok }));
     });
     this._router.post("/makeDirectory", (req, res) => {
-      const bodyQuery: Mkdir = req.body;
+      const body: { props: Mkdir; userId: string; access: AccessMap } =
+        req.body;
 
-      const result = this._fileSystemController.makeDirectory(bodyQuery);
+      const result = this._fileSystemController.makeDirectory(
+        body.props,
+        body.userId,
+        body.access
+      );
 
       res.send(
         new Response<string | null>({
@@ -45,8 +50,14 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       );
     });
     this._router.post("/makeFile", (req, res) => {
-      const bodyQuery: Mkdir = req.body;
-      const result = this._fileSystemController.makeFile(bodyQuery);
+      const body: { props: Mkdir; userId: string; access: AccessMap } =
+        req.body;
+
+      const result = this._fileSystemController.makeFile(
+        body.props,
+        body.userId,
+        body.access
+      );
 
       res.send(
         new Response<string | null>({

@@ -32,6 +32,14 @@
         "exeLocation": "C/ProgramFiles/terminal/",
         "mimeTypes": [],
         "permissions": [0]
+      },
+      {
+        "applicationIdentifier": "4",
+        "name": "debug",
+        "iconLocation": "C/ProgramFiles/debug/-icon.svg",
+        "exeLocation": "C/ProgramFiles/debug/dist",
+        "mimeTypes": [],
+        "permissions": [0]
       }
     ],
     "defaultApps": {
