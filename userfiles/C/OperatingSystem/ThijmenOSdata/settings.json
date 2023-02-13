@@ -1,14 +1,15 @@
 {
-  "system": {
-    "sounds": {},
-    "notifications": {},
-    "storage": {}
+  "sound": {
+    "volume": 100,
+    "inputDevice": null,
+    "outputDevice": null,
+    "volumeMixer": null
   },
-  "personalisation": {
-    "background": "C/images/wallpapers/SnowySunrise.webp"
-  },
-  "apps": {
-    "installedApps": [
+  "storage": null,
+  "bluetooth": null,
+  "network": null,
+  "applications": {
+    "installedApplications": [
       {
         "applicationIdentifier": "1",
         "name": "Explorer",
@@ -42,10 +43,11 @@
         "permissions": [0]
       }
     ],
-    "defaultApps": {
+    "defaultApplications": {
       "txt": "2",
       "dir": "1"
-    }
+    },
+    "startupApplications": null
   },
   "accounts": [
     {
@@ -53,14 +55,30 @@
       "username": "Thijmen",
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",
-      "pincode": "12345"
+      "pincode": "12345",
+      "preferences": {
+        "background": "C/images/wallpapers/SnowySunrise.webp",
+        "colors": null,
+        "themes": null,
+        "lockscreen": null,
+        "startMenu": null,
+        "fonts": null
+      }
     },
     {
       "userId": "2",
       "username": "Aukje",
       "email": "Aukje@ik.nu",
       "password": "Welkom01",
-      "pincode": "12345"
+      "pincode": "12345",
+      "preferences": {
+        "background": "C/images/wallpapers/02010-4.webp",
+        "colors": null,
+        "themes": null,
+        "lockscreen": null,
+        "startMenu": null,
+        "fonts": null
+      }
     }
   ]
 }
