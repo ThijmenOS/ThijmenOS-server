@@ -9,7 +9,7 @@ export default interface IFileSystemController {
     subjectId: string,
     accessLevels: AccessMap
   ): string | null;
-  removeDirectory(props: Path): string | null;
+  removeDirectory(props: Path): boolean;
   makeFile(
     props: Mkdir,
     subjectId: string,

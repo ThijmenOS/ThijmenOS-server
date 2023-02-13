@@ -103,15 +103,15 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
 
-  public removeDirectory(props: Path): string | null {
+  public removeDirectory(props: Path): boolean {
     const targetDir = computeTargetDir(props);
 
     if (fs.existsSync(targetDir)) {
       fs.rmSync(targetDir, { recursive: true });
-      return null;
+      return true;
     }
 
-    return "Provided directory does not exist";
+    return false;
   }
 }
 

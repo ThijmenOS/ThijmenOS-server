@@ -73,7 +73,7 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
 
       res.send(
-        new Response<string | null>({
+        new Response<boolean>({
           data: result,
           status: HttpStatus.created,
         })
