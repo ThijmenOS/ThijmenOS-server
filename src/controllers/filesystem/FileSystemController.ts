@@ -83,7 +83,11 @@ class FileSystemController implements IFileSystemController {
     return cleaned.join("/");
   }
 
-  public makeDirectory(props: Mkdir): string | null {
+  public makeDirectory(
+    props: Mkdir,
+    subjectId: string,
+    accessLevels: AccessMap
+  ): string | null {
     const targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
@@ -91,12 +95,18 @@ class FileSystemController implements IFileSystemController {
       if (fs.existsSync(newDir)) return "Directory already exists!";
 
       fs.mkdirSync(newDir, { recursive: true });
+      this.registerAccess(newDir, subjectId, accessLevels);
+
       return null;
     }
 
     return "Something went wrong";
   }
-  public makeFile(props: Mkdir): string | null {
+  public makeFile(
+    props: Mkdir,
+    subjectId: string,
+    accessLevels: AccessMap
+  ): string | null {
     const targetDir = computeTargetDir(props.directoryPath);
 
     if (fs.existsSync(targetDir)) {
@@ -104,6 +114,8 @@ class FileSystemController implements IFileSystemController {
       if (fs.existsSync(newFile)) return "File already exists";
 
       fs.openSync(newFile, "w");
+      this.registerAccess(newFile, subjectId, accessLevels);
+
       return null;
     }
 

@@ -22,6 +22,7 @@ class SettingsController implements ISettingsController {
     const stringify = JSON.stringify(settings, null, 2);
     fs.writeFileSync(this.settingsLocation, stringify);
   }
+  //TODO: Fix user settings
   private findTargetApplication(
     applicationList: Array<ApplicationMetaData>,
     targetApplicationId: string | number
@@ -32,23 +33,11 @@ class SettingsController implements ISettingsController {
     );
   }
 
-  public async SetBackground(ImagePath: string): Promise<void> {
-    const settings: OSSettings = await this.ReadSettings();
-
-    settings.personalisation.background = ImagePath;
-
-    this.WriteSettings(settings);
-  }
-  public async GetBackground(): Promise<string> {
-    const settings = await this.ReadSettings();
-    return settings.personalisation.background;
-  }
-
   public async GrantPermission(props: PermissionRequestDto): Promise<boolean> {
     const settings: OSSettings = await this.ReadSettings();
 
     const targetApplication = this.findTargetApplication(
-      settings.apps.installedApps,
+      settings.applications.installedApplications,
       props.applicationId
     );
 
@@ -70,7 +59,7 @@ class SettingsController implements ISettingsController {
     const settings: OSSettings = await this.ReadSettings();
 
     const targetApplication = this.findTargetApplication(
-      settings.apps.installedApps,
+      settings.applications.installedApplications,
       props.applicationId
     );
 
@@ -92,7 +81,7 @@ class SettingsController implements ISettingsController {
     const settings: OSSettings = await this.ReadSettings();
 
     const targetApplication = this.findTargetApplication(
-      settings.apps.installedApps,
+      settings.applications.installedApplications,
       applicationId
     );
 
@@ -102,16 +91,6 @@ class SettingsController implements ISettingsController {
     this.WriteSettings(settings);
 
     return true;
-  }
-
-  public async ReadUserSettings(userId: string): Promise<any> {
-    console.log("not implemented yet");
-    throw new Error("not implemented yet");
-  }
-
-  public async ReadGlobalSettings(userId: string): Promise<OSSettings> {
-    console.log("not implemented yet");
-    throw new Error("not implemented yet");
   }
 
   public async GetAllUsers(): Promise<Array<User>> {

@@ -16,22 +16,6 @@ class SettingsRoutes extends Route implements IRouterConfig {
   }
 
   public get routes(): Router {
-    this._router.post("/setBackground", async (req, res) => {
-      const filePath: { Path: Path } = req.body;
-
-      await this._settingsController.SetBackground(filePath.Path);
-
-      const background = await this._settingsController.GetBackground();
-
-      res.send(
-        new Response<string>({ data: background, status: HttpStatus.created })
-      );
-    });
-    this._router.get("/getBackground", async (req, res) => {
-      const result = await this._settingsController.GetBackground();
-
-      res.send(new Response<string>({ data: result, status: HttpStatus.ok }));
-    });
     this._router.post("/grantPermission", async (req, res) => {
       const reqbody: PermissionRequestDto = req.body;
       const result = await this._settingsController.GrantPermission(reqbody);
