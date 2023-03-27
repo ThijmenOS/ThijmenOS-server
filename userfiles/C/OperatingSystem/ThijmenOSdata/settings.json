@@ -52,6 +52,12 @@
   "accounts": [
     {
       "userId": "1",
+      "username": "Root",
+      "email": "Root@Root",
+      "password": "Root"
+    },
+    {
+      "userId": "2",
       "username": "Thijmen",
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",
@@ -66,7 +72,7 @@
       }
     },
     {
-      "userId": "2",
+      "userId": "3",
       "username": "Aukje",
       "email": "Aukje@ik.nu",
       "password": "Welkom01",

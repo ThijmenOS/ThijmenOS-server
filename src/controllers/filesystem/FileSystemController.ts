@@ -44,8 +44,27 @@ class FileSystemController implements IFileSystemController {
     fs.appendFileSync(targetFile, entry);
   }
 
+  private async removeFromAccess(path: Path) {
+    const targetFile = computeTargetDir(
+      "C/OperatingSystem/ThijmenOSdata/.access"
+    );
+
+    const accessFileContent: string = fs.readFileSync(targetFile, "utf8");
+
+    const accessFileContentArray = accessFileContent.split("\n");
+
+    const entriesToKeep = accessFileContentArray.filter(
+      (x) => !x.includes(path)
+    );
+
+    const modifiedEntriesFile: string = entriesToKeep.join("\n");
+    fs.writeFileSync(targetFile, modifiedEntriesFile, "utf8");
+  }
+
   public readFile(dir: string): string {
     const targetFile = computeTargetDir(dir);
+
+    this.removeFromAccess(dir);
 
     return fs.readFileSync(targetFile, "utf8");
   }
@@ -103,15 +122,17 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
 
-  public removeDirectory(props: Path): boolean {
+  public removeDirectory(props: Path): boolean | null {
     const targetDir = computeTargetDir(props);
 
-    if (fs.existsSync(targetDir)) {
-      fs.rmSync(targetDir, { recursive: true });
-      return true;
+    if (!fs.existsSync(targetDir)) {
+      return false;
     }
 
-    return false;
+    fs.rmSync(targetDir, { recursive: true });
+    this.removeFromAccess(props);
+
+    return true;
   }
 }
 
