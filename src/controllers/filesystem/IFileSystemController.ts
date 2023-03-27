@@ -5,6 +5,6 @@ export default interface IFileSystemController {
   readFile(dir: string): string;
   dirExists(dir: string): string;
   makeDirectory(props: Mkdir): string | null;
-  removeDirectory(props: Path): string | null;
+  removeDirectory(props: Path): boolean | null;
   makeFile(props: Mkdir): string | null;
 }

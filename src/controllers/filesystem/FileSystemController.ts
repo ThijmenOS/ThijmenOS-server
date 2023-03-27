@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
-import { Directory, Mkdir, Path } from "@thijmen-os/common";
+import { Access, AccessMap, Directory, Mkdir, Path } from "@thijmen-os/common";
 
 import { computeTargetDir } from "../helpers/computeTargetDir";
 
@@ -26,8 +26,45 @@ class FileSystemController implements IFileSystemController {
     return ret;
   }
 
+  private registerAccess(path: Path, userId: string, access: AccessMap) {
+    //TODO: Make this env variable
+    //TODO: Implement groups
+    const targetFile = computeTargetDir(
+      "C/OperatingSystem/ThijmenOSdata/.access"
+    );
+
+    const rwx: Array<string> = [];
+    Object.keys(access).map((x) =>
+      access[x as Access] ? rwx.push(x.toString()) : rwx.push("-")
+    );
+    const targetPath = path.substring(10).split("\\").join("/");
+
+    const entry = `\n${targetPath}:${userId}${rwx.join("")}:1rwx`;
+
+    fs.appendFileSync(targetFile, entry);
+  }
+
+  private async removeFromAccess(path: Path) {
+    const targetFile = computeTargetDir(
+      "C/OperatingSystem/ThijmenOSdata/.access"
+    );
+
+    const accessFileContent: string = fs.readFileSync(targetFile, "utf8");
+
+    const accessFileContentArray = accessFileContent.split("\n");
+
+    const entriesToKeep = accessFileContentArray.filter(
+      (x) => !x.includes(path)
+    );
+
+    const modifiedEntriesFile: string = entriesToKeep.join("\n");
+    fs.writeFileSync(targetFile, modifiedEntriesFile, "utf8");
+  }
+
   public readFile(dir: string): string {
     const targetFile = computeTargetDir(dir);
+
+    this.removeFromAccess(dir);
 
     return fs.readFileSync(targetFile, "utf8");
   }
@@ -73,17 +110,17 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
 
-  public removeDirectory(props: Path): string | null {
+  public removeDirectory(props: Path): boolean | null {
     const targetDir = computeTargetDir(props);
 
-    console.log(targetDir);
-
-    if (fs.existsSync(targetDir)) {
-      fs.rmSync(targetDir, { recursive: true });
-      return null;
+    if (!fs.existsSync(targetDir)) {
+      return false;
     }
 
-    return "Provided directory does not exist";
+    fs.rmSync(targetDir, { recursive: true });
+    this.removeFromAccess(props);
+
+    return true;
   }
 }
 

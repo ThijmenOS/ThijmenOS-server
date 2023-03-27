@@ -57,10 +57,39 @@
   "accounts": [
     {
       "userId": "1",
+      "username": "Root",
+      "email": "Root@Root",
+      "password": "Root"
+    },
+    {
+      "userId": "2",
       "username": "Thijmen",
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",
-      "pincode": "12345"
+      "pincode": "12345",
+      "preferences": {
+        "background": "C/images/wallpapers/SnowySunrise.webp",
+        "colors": null,
+        "themes": null,
+        "lockscreen": null,
+        "startMenu": null,
+        "fonts": null
+      }
+    },
+    {
+      "userId": "3",
+      "username": "Aukje",
+      "email": "Aukje@ik.nu",
+      "password": "Welkom01",
+      "pincode": "12345",
+      "preferences": {
+        "background": "C/images/wallpapers/02010-4.webp",
+        "colors": null,
+        "themes": null,
+        "lockscreen": null,
+        "startMenu": null,
+        "fonts": null
+      }
     }
   ]
 }
