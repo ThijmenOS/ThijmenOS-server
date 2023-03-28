@@ -14,7 +14,7 @@ class Root implements RootMethods {
 
     const AccessObject: AccessObjectMap = {};
 
-    raw.split("\n").map((accessLine) => {
+    raw.split(/\r?\n/).map((accessLine) => {
       const accessAttributes = accessLine.split(":");
       let path = accessAttributes.shift();
       if (!path) path = "####";

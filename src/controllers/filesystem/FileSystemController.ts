@@ -122,7 +122,7 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
 
-  public removeDirectory(props: Path): boolean | null {
+  public removeDirectory(props: Path): boolean {
     const targetDir = computeTargetDir(props);
 
     if (!fs.existsSync(targetDir)) {
