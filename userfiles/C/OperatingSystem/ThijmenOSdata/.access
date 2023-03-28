@@ -1,2 +1,7 @@
-C/Users/Aukje:3rwx:3rwx
 C/Users/Thijmen:2rwx:2rwx
+C/Users/Aukje:3rwx:3rwx
+C/OperatingSystem:1r--:1r--
+C/OperatingSystem/settings.json:1rw-:1rw-
+C/OperatingSystem/.access:1rw-:1rw-
+C/Users/Thijmen/Documents/new folder:2rwx:1rwx
+C/Users/Thijmen/Documents/new folder/new file.txt:2rwx:1rwx
