@@ -14,7 +14,7 @@
         "applicationIdentifier": "1",
         "name": "Explorer",
         "iconLocation": "C/ProgramFiles/fileexplorer/fileexplorer-icon.svg",
-        "exeLocation": "C/ProgramFiles/fileexplorer/",
+        "exeLocation": "C/ProgramFiles/fileexplorer/worker.js",
         "mimeTypes": ["dir"],
         "permissions": [0]
       },
@@ -23,7 +23,7 @@
         "name": "NoteBlock",
         "iconLocation": "C/ProgramFiles/noteblock/noteblock-icon.svg",
         "exeLocation": "C/ProgramFiles/noteblock/index.js",
-        "mimeTypes": ["txt", "json", "html"],
+        "mimeTypes": ["txt", "json", "html", "js", "css"],
         "permissions": [0]
       },
       {
@@ -45,6 +45,9 @@
     ],
     "defaultApplications": {
       "txt": "2",
+      "html": "2",
+      "js": "2",
+      "css": "2",
       "dir": "1"
     },
     "startupApplications": null

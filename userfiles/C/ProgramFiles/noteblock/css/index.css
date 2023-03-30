@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+}
+textarea {
+    height: 100%;
+    width: 100%;
+    resize: none;
+    background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;
+    font: normal 14px verdana;
+    line-height: 25px;
+    border: solid 1px #ddd;
+}
