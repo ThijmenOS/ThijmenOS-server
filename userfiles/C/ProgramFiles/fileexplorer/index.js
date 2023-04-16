@@ -1,3 +1,5 @@
+import fileIcons from "./icons/icons.js";
+
 onmessage = ev => interpretMessage(ev.data);
 
 let history = ["C"];
@@ -11,6 +13,13 @@ function init() {
     document.getElementById("right-arrow").addEventListener("click", handleForward);
 
     listFiles(currentPath);
+}
+
+function interpretMessage(messageData) {
+    if(messageData.eventName === "listFiles") {
+        pupulateHtml(messageData.eventData);
+        console.log(messageData.eventData)
+    }
 }
 
 function handleBack() {
@@ -47,12 +56,6 @@ function communicateWithOS(method, params) {
     }, "*")
 }
 
-function interpretMessage(messageData) {
-    if(messageData.eventName === "listFiles") {
-        pupulateHtml(messageData.eventData);
-        console.log(messageData.eventData)
-    }
-}
 
 function handleClick(path, isDir) {
     if(isDir) {
@@ -81,15 +84,50 @@ function openFile(path) {
 }
 
 function pupulateHtml(files) {
-    const el = document.getElementById("main-container");
+    const el = document.getElementById("current-directory");
     el.innerHTML = null;
+
+    const constructImage = (type) => {
+        const img = document.createElement("img");
+        img.src = `/static/C/OperatingSystem/Icons/file_type_${fileIcons[type]}.svg`
+        img.classList.add("file-type-icon")
+
+        return img;
+    }
+
+    const constructText = (name) => {
+        const text = document.createElement("p");
+        text.innerText = name;
+        
+        return text;
+    }
+
+    const constructSpan = (img, text) => {
+        const span = document.createElement("span");
+        span.classList.add("file-explorer-listing-entry")
+        span.appendChild(img);
+        span.appendChild(text);
+
+        return span;
+    }
+
+    const constructList = (span, file) => {
+        const list = document.createElement("li");
+        list.addEventListener("click", () => handleClick(file.filePath, file.isDir));
+        list.classList.add("file-explorer-listing")
+        list.appendChild(span);
+
+        return list;
+    }
 
     const listEl = document.createElement("ul");
     files.forEach(file => {
-        const el = document.createElement("li");
-        el.innerText = file.filePath.split("/").at(-1);
-        el.addEventListener("click", () => handleClick(file.filePath, file.isDir));
-        listEl.appendChild(el);
+        const text = constructText(file.filePath.split("/").at(-1));
+        const img = constructImage(!file.isDir ? file.filePath.split(".").at(-1) : "dir");
+
+        const span = constructSpan(img, text);
+
+        listEl.appendChild(constructList(span, file));
     });
 
     el.appendChild(listEl);

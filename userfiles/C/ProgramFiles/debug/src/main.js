@@ -1,5 +1,4 @@
 import OS, {
-  OpenFileWithApplication,
   CloseSelf,
 } from "@thijmen-os/developmentkit";
 

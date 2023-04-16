@@ -2,3 +2,62 @@
     height: 1em;
     width: 1em;
 }
+
+.main-container {
+    width: 100%;
+    display: flex;
+}
+
+.pinned-directories {
+    width: 20%;
+}
+
+.file-path-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 0.5em;
+}
+
+.file-path-container > .path-history {
+    width: 80%;
+}
+
+.current-directory {
+    border: 1px solid gray;
+    width: 80%;
+}
+
+.file-explorer-listing {
+    padding: 0.5em;
+}
+
+.file-explorer-listing:hover {
+    background-color: rgb(212, 212, 212);
+}
+
+.file-explorer-listing-entry {
+    display: flex;
+    align-items: center;
+}
+
+.file-explorer-listing-entry > p {
+    margin: 0;
+}
+
+.file-explorer-listing-entry > img {
+    margin-right: 0.5em;
+}
+
+li {
+    list-style-type: none;
+    display: flex;
+}
+
+ul {
+    padding: 0;
+}
+
+.file-type-icon {
+    height: 1em;
+    width: 1em;
+}
