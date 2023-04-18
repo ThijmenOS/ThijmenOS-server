@@ -14,7 +14,7 @@
         "applicationIdentifier": "1",
         "name": "Explorer",
         "iconLocation": "C/ProgramFiles/fileexplorer/fileexplorer-icon.svg",
-        "exeLocation": "C/ProgramFiles/fileexplorer/worker.js",
+        "exeLocation": "C/ProgramFiles/fileexplorer/index.html",
         "mimeTypes": ["dir"],
         "permissions": [0]
       },
@@ -22,7 +22,7 @@
         "applicationIdentifier": "2",
         "name": "NoteBlock",
         "iconLocation": "C/ProgramFiles/noteblock/noteblock-icon.svg",
-        "exeLocation": "C/ProgramFiles/noteblock/index.js",
+        "exeLocation": "C/ProgramFiles/noteblock/index.html",
         "mimeTypes": ["txt", "json", "html", "js", "css"],
         "permissions": [0]
       },
