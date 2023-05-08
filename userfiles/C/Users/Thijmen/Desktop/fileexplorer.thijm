@@ -1,5 +1,5 @@
 {
   "name": "fileexplorer",
   "iconLocation": "C/ProgramFiles/fileexplorer/fileexplorer-icon.svg",
-  "exeLocation": "C/ProgramFiles/fileexplorer/index.html"
+  "exeLocation": "C/ProgramFiles/fileexplorer/index.js"
 }

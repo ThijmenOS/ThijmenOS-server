@@ -1,20 +1,23 @@
+import { ThijmenOS } from "../../operatingSystemApi.js";
 import fileIcons from "../icons/icons.js";
-import OS from "../../operatingSystemApi.js"
-
-OS.onStartup((args) => init(args))
+const OS = new ThijmenOS("window");
 
 let history = ["C"];
 let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
 
+await OS.startup((args) => init(args));
+
 function init(args) {
-  console.log(args)
+  console.log(args);
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document
     .getElementById("right-arrow")
     .addEventListener("click", handleForward);
 
-  listFiles(currentPath);
+  setTimeout(() => {
+    listFiles(currentPath);
+  }, 100);
 }
 
 function handleBack() {
@@ -52,8 +55,10 @@ function handleClick(path, isDir) {
   }
 }
 
-function listFiles(dir) {
-  OS.callCommand("listFiles", dir, (ev) => pupulateHtml(ev.data))
+async function listFiles(dir) {
+  const files = await OS.ls(dir);
+  console.log(files);
+  pupulateHtml(files);
   setCurrentPath(dir);
 }
 
@@ -62,10 +67,7 @@ function openFile(path) {
 
   if (!mimetype) return;
 
-  OS.callCommand("openFile", {
-    filePath: path,
-    mimeType: mimetype,
-  }, (ev) => console.log(ev))
+  OS.openFile(path, mimetype);
 }
 
 function pupulateHtml(files) {
@@ -108,9 +110,7 @@ function pupulateHtml(files) {
   };
 
   const listEl = document.createElement("ul");
-  console.log(files)
   files.forEach((file) => {
-    console.log(file)
     const text = constructText(file.filePath.split("/").at(-1));
     const img = constructImage(
       !file.isDir ? file.filePath.split(".").at(-1) : "dir"

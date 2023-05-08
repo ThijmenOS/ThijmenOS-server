@@ -1,35 +1,41 @@
-import OS from "../operatingSystemApi.js";
+import { ThijmenOS } from "../operatingSystemApi.js";
 
-OS.onStartup((args) => interpretArgs(args))
+const OS = new ThijmenOS("worker");
 
-function interpretArgs(args) {
-    const argFlags = args.split(" ");
-    const modeFlag = argFlags.findIndex((arg) => arg === "--mode")
-    if(modeFlag < 0) {
-        startRegular()
-        return;
-    }
+const args = await OS.startup();
 
-    const mode = argFlags[modeFlag + 1];
-    const availableModes = ["file_select"]
-    if(!mode || !availableModes.includes(mode)) {
-        OS.callCommand("terminateProcess");
-        throw new Error("Selected Mode is not supported")
-    }
-
-    const parentPidFlag = argFlags.findIndex((arg) => arg === "--pid")
-    if(parentPidFlag < 0) throw new Error("ParentPid not defined")
-
-    const parentPid = argFlags[parentPidFlag + 1];
-
-    startSelectClient(parentPid);
+if (args === 0) {
+  startRegular();
+  OS.exit();
 }
 
-function startRegular() {
-    OS.callCommand("spawnWindow", {guiPath: "C/ProgramFiles/fileexplorer/applicationClient/gui.html"})
+const argFlags = args.split(" ");
+const modeFlag = argFlags.findIndex((arg) => arg === "--mode");
+const mode = argFlags[modeFlag + 1];
+const availableModes = ["file_select"];
+if (!mode || !availableModes.includes(mode)) {
+  OS.exit();
+  throw new Error("Selected Mode is not supported");
 }
 
-function startSelectClient(parentPid) {
-    OS.callCommand("spawnWindow", {guiPath: "C/ProgramFiles/fileexplorer/fileSelectClient/gui.html", args: parentPid})
+const parentPidFlag = argFlags.findIndex((arg) => arg === "--pid");
+if (parentPidFlag < 0) throw new Error("ParentPid not defined");
 
+const parentPid = argFlags[parentPidFlag + 1];
+
+await startSelectClient(parentPid);
+
+async function startRegular() {
+  const pid = await OS.startProcess(
+    "C/ProgramFiles/fileexplorer/applicationClient/gui.html"
+  );
+  OS.exit();
+}
+
+async function startSelectClient(parentPid) {
+  const pid = await OS.startProcess(
+    "C/ProgramFiles/fileexplorer/fileSelectClient/gui.html",
+    `--parentPid ${parentPid}`
+  );
+  OS.exit();
 }
