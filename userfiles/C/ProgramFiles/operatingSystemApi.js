@@ -130,4 +130,28 @@ export class ThijmenOS {
 
     return await this.listen(messageId);
   }
+
+  async crtMsgBus(pid, buffer) {
+    const messageId = this.sendMessage("crtmsgbus", {
+      targetPid: pid,
+      bufferSize: buffer,
+    });
+
+    return await this.listen(messageId);
+  }
+
+  async sendMsg(receivingPid, message) {
+    const messageId = this.sendMessage("sendMsg", {
+      receivingPid: receivingPid,
+      message: message,
+    });
+
+    return await this.listen(messageId);
+  }
+
+  async readMsg(sendingPid) {
+    const messageId = this.sendMessage("readMsg", sendingPid);
+
+    return await this.listen(messageId);
+  }
 }

@@ -5,11 +5,31 @@ const OS = new ThijmenOS("window");
 let history = ["C"];
 let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
+let parentPid = null;
 
 await OS.startup((args) => init(args));
 
-function init(args) {
+function extractArgs(args) {
+  const argsArr = args.split(" ");
+  const pidKey = argsArr.findIndex((arg) => arg === "--pid");
+  if (!pidKey) OS.exit(-1);
+
+  const pid = argsArr[pidKey + 1];
+  if (!pid) OS.exit(-1);
+
+  return Number(pid);
+}
+
+async function init(args) {
   console.log(args);
+
+  const targetPid = extractArgs(args);
+  parentPid = targetPid;
+  const created = await OS.crtMsgBus(targetPid, 5);
+  if (created.id !== 0) {
+    OS.exit(-1);
+  }
+
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document
     .getElementById("right-arrow")
@@ -57,7 +77,6 @@ function handleClick(path, isDir) {
 
 async function listFiles(dir) {
   const files = await OS.ls(dir);
-  console.log(files);
   pupulateHtml(files);
   setCurrentPath(dir);
 }
@@ -67,7 +86,7 @@ function openFile(path) {
 
   if (!mimetype) return;
 
-  OS.openFile(path, mimetype);
+  OS.sendMsg(parentPid, { path: path, mimetype: mimetype });
 }
 
 function pupulateHtml(files) {
