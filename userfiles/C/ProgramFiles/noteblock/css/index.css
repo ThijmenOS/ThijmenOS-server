@@ -10,3 +10,6 @@ textarea {
     line-height: 25px;
     border: solid 1px #ddd;
 }
+.top-header {
+    width: 100%;
+}

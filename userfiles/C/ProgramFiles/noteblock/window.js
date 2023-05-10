@@ -1,21 +1,31 @@
-onmessage = ev => interpretMessage(ev.data);
+import OS from "../operatingSystemApi.js";
 
-function interpretMessage(messageData) {
-    if(messageData.eventName === "startedApplication") {
-        window.top.postMessage({
-            origin: window.name,
-            method: "readFile",
-            params: messageData.eventData
-        }, "*")
-    }
+OS.onStartup((args) => interpretMessage(args))
 
-    if(messageData.eventName === "selfInvoked") {
-        openFile(messageData.eventData)
+const openFileButton = document.getElementById("open-file");
+
+init()
+
+function init() {
+    openFileButton.addEventListener("click", () => openFile())
+}
+
+function interpretMessage(filePath) {
+    if(filePath) {
+        OS.callCommand("readFile", filePath, (ev) => readFile(ev));
     }
 }
 
-function openFile(fileContent) {
+function openFile() {
+    OS.callCommand("selectFile");
+}
+
+function readFile(fileObject) {
+    if(fileObject.id !== 0) {
+        throw new Error(fileObject.data);
+    }
+
     const el = document.getElementById("content");
 
-    el.innerHTML = fileContent
+    el.innerHTML = fileObject.data;
 }
