@@ -125,10 +125,16 @@ export class ThijmenOS {
     return await this.listen(messageId);
   }
 
-  async waitpid(pid) {
+  async waitpid(pid, callback) {
     const messageId = this.sendMessage("waitpid", pid);
 
-    return await this.listen(messageId);
+    const value = await this.listen(messageId);
+
+    if (callback) {
+      return callback(value);
+    }
+
+    return value;
   }
 
   async crtMsgBus(pid, buffer) {
@@ -151,6 +157,21 @@ export class ThijmenOS {
 
   async readMsg(sendingPid) {
     const messageId = this.sendMessage("readMsg", sendingPid);
+
+    return await this.listen(messageId);
+  }
+
+  async getProcesses() {
+    const messageId = this.sendMessage("getProcesses");
+
+    return await this.listen(messageId);
+  }
+
+  async kill(pid, exitCode) {
+    const messageId = this.sendMessage("kill", {
+      pid: pid,
+      exitCode: exitCode,
+    });
 
     return await this.listen(messageId);
   }

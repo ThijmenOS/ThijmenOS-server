@@ -1,0 +1,5 @@
+{
+  "name": "TaskManager",
+  "iconLocation": "C/ProgramFiles/taskManager/icon.svg",
+  "exeLocation": "C/ProgramFiles/taskManager/index.html"
+}

@@ -9,25 +9,32 @@ let parentPid = null;
 
 await OS.startup((args) => init(args));
 
+function listenForParentExit() {
+  setInterval(() => {
+    OS.waitpid(parentPid, (status) => {
+      if (status === 0) OS.exit(0);
+    });
+  }, 100);
+}
+
 function extractArgs(args) {
   const argsArr = args.split(" ");
   const pidKey = argsArr.findIndex((arg) => arg === "--pid");
-  if (!pidKey) OS.exit(-1);
+  if (!pidKey) OS.exit(1);
 
   const pid = argsArr[pidKey + 1];
-  if (!pid) OS.exit(-1);
+  if (!pid) OS.exit(1);
 
   return Number(pid);
 }
 
 async function init(args) {
-  console.log(args);
+  parentPid = extractArgs(args);
+  listenForParentExit();
 
-  const targetPid = extractArgs(args);
-  parentPid = targetPid;
-  const created = await OS.crtMsgBus(targetPid, 5);
+  const created = await OS.crtMsgBus(parentPid, 5);
   if (created.id !== 0) {
-    OS.exit(-1);
+    OS.exit(1);
   }
 
   document.getElementById("left-arrow").addEventListener("click", handleBack);
@@ -87,6 +94,7 @@ function openFile(path) {
   if (!mimetype) return;
 
   OS.sendMsg(parentPid, { path: path, mimetype: mimetype });
+  OS.exit(0);
 }
 
 function pupulateHtml(files) {

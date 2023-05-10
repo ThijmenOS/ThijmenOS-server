@@ -9,12 +9,11 @@ setInterval(async () => {
   const message = await OS.readMsg(pid);
   if (!message) return;
   if (message) {
-    console.log(message);
     OS.openFile(message.path, message.mimetype);
   }
 
   const exited = await OS.waitpid(pid);
-  if (exited > 0) {
+  if (exited === 0) {
     OS.exit();
   }
 }, 100);
