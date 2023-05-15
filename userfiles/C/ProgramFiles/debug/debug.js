@@ -1,20 +1,31 @@
 import { ThijmenOS } from "../operatingSystemApi.js";
 const OS = new ThijmenOS("worker");
 
-await OS.startup();
+let pid;
+let mqHandle;
 
-const pid = await OS.selectFile();
+await OS.startup(init);
+
+async function init(args) {
+  pid = await OS.selectFile();
+
+  mqHandle = await OS.mqOpen("DebugMQ", [0]);
+
+  if (mqHandle === -1) {
+    OS.exit(1);
+  }
+}
 
 setInterval(async () => {
-  const message = await OS.readMsg(pid);
+  const message = await OS.readMsg(mqHandle);
   if (!message) return;
   if (message) {
     OS.openFile(message.path, message.mimetype);
   }
 
   const exited = await OS.waitpid(pid);
-  if (exited === 0) {
-    OS.exit();
+  if (exited !== -1) {
+    OS.exit(0);
   }
 }, 100);
 

@@ -137,26 +137,27 @@ export class ThijmenOS {
     return value;
   }
 
-  async crtMsgBus(pid, buffer) {
-    const messageId = this.sendMessage("crtmsgbus", {
-      targetPid: pid,
-      bufferSize: buffer,
+  async mqOpen(name, flags, bufferSize) {
+    const messageId = this.sendMessage("mqOpen", {
+      name: name,
+      flags: flags,
+      bufferSize: bufferSize,
     });
 
     return await this.listen(messageId);
   }
 
-  async sendMsg(receivingPid, message) {
+  async sendMsg(msqId, message) {
     const messageId = this.sendMessage("sendMsg", {
-      receivingPid: receivingPid,
+      msbId: msqId,
       message: message,
     });
 
     return await this.listen(messageId);
   }
 
-  async readMsg(sendingPid) {
-    const messageId = this.sendMessage("readMsg", sendingPid);
+  async readMsg(msqId) {
+    const messageId = this.sendMessage("readMsg", msqId);
 
     return await this.listen(messageId);
   }

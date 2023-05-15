@@ -6,13 +6,14 @@ let history = ["C"];
 let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
 let parentPid = null;
+let mqHandle;
 
 await OS.startup((args) => init(args));
 
 function listenForParentExit() {
   setInterval(() => {
     OS.waitpid(parentPid, (status) => {
-      if (status === 0) OS.exit(0);
+      if (status !== -1) OS.exit(0);
     });
   }, 100);
 }
@@ -32,10 +33,7 @@ async function init(args) {
   parentPid = extractArgs(args);
   listenForParentExit();
 
-  const created = await OS.crtMsgBus(parentPid, 5);
-  if (created.id !== 0) {
-    OS.exit(1);
-  }
+  mqHandle = OS.mqOpen("DebugMQ", [1, 3], 5);
 
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document
@@ -88,13 +86,20 @@ async function listFiles(dir) {
   setCurrentPath(dir);
 }
 
-function openFile(path) {
+async function openFile(path) {
   const mimetype = path.split(".").at(-1);
 
   if (!mimetype) return;
 
-  OS.sendMsg(parentPid, { path: path, mimetype: mimetype });
-  OS.exit(0);
+  const messageCode = await OS.sendMsg(mqHandle, {
+    path: path,
+    mimetype: mimetype,
+  });
+  if (messageCode === 0) {
+    OS.exit(0);
+  } else {
+    console.error(`message failed to send with error code ${messageCode}`);
+  }
 }
 
 function pupulateHtml(files) {
