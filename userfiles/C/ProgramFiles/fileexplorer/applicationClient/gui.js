@@ -1,19 +1,21 @@
+import * as OS from "../../bin/index.js";
 import fileIcons from "../icons/icons.js";
-import OS from "../../operatingSystemApi.js"
-
-OS.onStartup(() => init())
 
 let history = ["C"];
 let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
 
-function init() {
+await OS.startup(() => init());
+
+async function init(args) {
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document
     .getElementById("right-arrow")
     .addEventListener("click", handleForward);
 
-  listFiles(currentPath);
+  setTimeout(() => {
+    listFiles(currentPath);
+  }, 100);
 }
 
 function handleBack() {
@@ -42,17 +44,6 @@ function setCurrentPath(path) {
   historyElement.value = path;
 }
 
-function communicateWithOS(method, params) {
-  window.top.postMessage(
-    {
-      origin: window.name,
-      method: method,
-      params: params,
-    },
-    "*"
-  );
-}
-
 function handleClick(path, isDir) {
   if (isDir) {
     listFiles(path);
@@ -62,20 +53,20 @@ function handleClick(path, isDir) {
   }
 }
 
-function listFiles(dir) {
-  OS.callCommand("listFiles", dir, (ev) => pupulateHtml(ev.data))
+async function listFiles(dir) {
+  const files = await OS.ls(dir);
+  pupulateHtml(files);
   setCurrentPath(dir);
 }
 
-function openFile(path) {
+async function openFile(path) {
   const mimetype = path.split(".").at(-1);
 
   if (!mimetype) return;
 
-  OS.callCommand("openFile", {
-    filePath: path,
-    mimeType: mimetype,
-  }, (ev) => console.log(ev))
+  console.log(mimetype);
+
+  await OS.fOpen(path, mimetype);
 }
 
 function pupulateHtml(files) {
@@ -118,7 +109,6 @@ function pupulateHtml(files) {
   };
 
   const listEl = document.createElement("ul");
-
   files.forEach((file) => {
     const text = constructText(file.filePath.split("/").at(-1));
     const img = constructImage(

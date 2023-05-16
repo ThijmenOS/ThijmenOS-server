@@ -1,4 +1,4 @@
-import { Path, PermissionRequestDto } from "@thijmen-os/common";
+import { PermissionRequestDto, User } from "@thijmen-os/common";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
 import { Router } from "express";
@@ -58,6 +58,31 @@ class SettingsRoutes extends Route implements IRouterConfig {
       if (!result) response.status = HttpStatus.notFound;
 
       res.send(response);
+    });
+    this._router.post("/user", async (req, res) => {
+      const user: User = req.body;
+
+      if (!user) {
+        const response = new Response<null>({
+          data: null,
+          status: HttpStatus.badRequest,
+        });
+
+        res.send(response);
+      }
+
+      try {
+        const result = await this._settingsController.UpdateUserInfo(user);
+
+        res.send(new Response<User>({ data: result, status: HttpStatus.ok }));
+      } catch (err) {
+        res.send(
+          new Response<null>({
+            data: null,
+            status: HttpStatus.serverError,
+          })
+        );
+      }
     });
 
     return this._router;

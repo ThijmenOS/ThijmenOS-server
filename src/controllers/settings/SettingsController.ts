@@ -6,8 +6,10 @@ import {
   Permissions,
   PermissionRequestDto,
   User,
+  Accounts,
 } from "@thijmen-os/common";
 import { injectable } from "inversify";
+import { computeTargetDir } from "../helpers/computeTargetDir";
 
 @injectable()
 class SettingsController implements ISettingsController {
@@ -93,10 +95,33 @@ class SettingsController implements ISettingsController {
     return true;
   }
 
-  public async GetAllUsers(): Promise<Array<User>> {
+  public async GetAllUsers(): Promise<Accounts> {
     const settings: OSSettings = await this.ReadSettings();
 
     return settings.accounts;
+  }
+
+  public async UpdateUserInfo(user: User): Promise<User> {
+    const settings: OSSettings = await this.ReadSettings();
+    const oldUserInfo = settings.accounts[user.userId];
+
+    const userDesktopPath = computeTargetDir("C/Users/");
+    const oldPath = userDesktopPath + oldUserInfo.username;
+
+    if (!settings.accounts[user.userId])
+      throw new Error("Could not find user with target userId");
+
+    settings.accounts[user.userId] = user;
+
+    const newPath = userDesktopPath + user.username;
+    console.log(oldPath);
+    fs.rename(oldPath, newPath, (err) => {
+      if (err) throw new Error("could not rename folder");
+    });
+
+    this.WriteSettings(settings);
+
+    return settings.accounts[user.userId];
   }
 }
 

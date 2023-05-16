@@ -1,6 +1,5 @@
-import { ThijmenOS } from "../../operatingSystemApi.js";
+import * as OS from "../../bin/index.js";
 import fileIcons from "../icons/icons.js";
-const OS = new ThijmenOS("window");
 
 let history = ["C"];
 let currentPathIndex = 0;
@@ -33,7 +32,7 @@ async function init(args) {
   parentPid = extractArgs(args);
   listenForParentExit();
 
-  mqHandle = OS.mqOpen("DebugMQ", [1, 3], 5);
+  mqHandle = await OS.mqOpen("DebugMQ", [1]);
 
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document

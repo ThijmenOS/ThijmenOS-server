@@ -61,24 +61,30 @@ class FileSystemController implements IFileSystemController {
     fs.writeFileSync(targetFile, modifiedEntriesFile, "utf8");
   }
 
-  public readFile(dir: string): string {
+  public readFile(dir: string): string | number {
     const targetFile = computeTargetDir(dir);
 
     this.removeFromAccess(dir);
 
-    return fs.readFileSync(targetFile, "utf8");
+    try {
+      const fileContent = fs.readFileSync(targetFile, "utf8");
+
+      return fileContent;
+    } catch (err) {
+      return -1;
+    }
   }
 
-  public dirExists(dir: string): string {
+  public dirExists(dir: string): number | string {
     const targetDir = computeTargetDir(dir);
     const normalised = path.normalize(targetDir);
-    if (!fs.existsSync(normalised)) return "non-existant";
+    if (!fs.existsSync(normalised)) return -1;
 
     const cleaned = normalised.split("\\");
     cleaned.shift();
 
     if (cleaned.at(-1) === "") cleaned.pop();
-    if (cleaned.length <= 0) return "non-existant";
+    if (cleaned.length <= 0) return -1;
 
     return cleaned.join("/");
   }

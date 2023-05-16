@@ -1,5 +1,4 @@
-import { ThijmenOS } from "../operatingSystemApi.js";
-const OS = new ThijmenOS("worker");
+import * as OS from "../bin/index.js";
 
 let pid;
 let mqHandle;
@@ -7,9 +6,9 @@ let mqHandle;
 await OS.startup(init);
 
 async function init(args) {
-  pid = await OS.selectFile();
+  pid = await OS.fDialog();
 
-  mqHandle = await OS.mqOpen("DebugMQ", [0]);
+  mqHandle = await OS.mqOpen("DebugMQ", [0, 3], 5);
 
   if (mqHandle === -1) {
     OS.exit(1);
@@ -18,9 +17,10 @@ async function init(args) {
 
 setInterval(async () => {
   const message = await OS.readMsg(mqHandle);
-  if (!message) return;
+  if (message === -1) return;
   if (message) {
-    OS.openFile(message.path, message.mimetype);
+    OS.fOpen(message.path, message.mimetype);
+    OS.exit(0);
   }
 
   const exited = await OS.waitpid(pid);

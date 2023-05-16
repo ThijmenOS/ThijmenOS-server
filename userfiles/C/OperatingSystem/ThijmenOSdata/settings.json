@@ -15,16 +15,28 @@
         "name": "Explorer",
         "iconLocation": "C/ProgramFiles/fileexplorer/fileexplorer-icon.svg",
         "exeLocation": "C/ProgramFiles/fileexplorer/index.html",
-        "mimeTypes": ["dir"],
-        "permissions": [0]
+        "mimeTypes": [
+          "dir"
+        ],
+        "permissions": [
+          0
+        ]
       },
       {
         "applicationIdentifier": "2",
         "name": "NoteBlock",
         "iconLocation": "C/ProgramFiles/noteblock/noteblock-icon.svg",
         "exeLocation": "C/ProgramFiles/noteblock/index.html",
-        "mimeTypes": ["txt", "json", "html", "js", "css"],
-        "permissions": [0]
+        "mimeTypes": [
+          "txt",
+          "json",
+          "html",
+          "js",
+          "css"
+        ],
+        "permissions": [
+          0
+        ]
       },
       {
         "applicationIdentifier": "3",
@@ -32,7 +44,9 @@
         "iconLocation": "C/ProgramFiles/terminal/terminal-icon.svg",
         "exeLocation": "C/ProgramFiles/terminal/",
         "mimeTypes": [],
-        "permissions": [0]
+        "permissions": [
+          0
+        ]
       },
       {
         "applicationIdentifier": "4",
@@ -40,7 +54,9 @@
         "iconLocation": "C/ProgramFiles/debug/-icon.svg",
         "exeLocation": "C/ProgramFiles/debug/",
         "mimeTypes": [],
-        "permissions": [0]
+        "permissions": [
+          0
+        ]
       }
     ],
     "defaultApplications": {
@@ -52,16 +68,10 @@
     },
     "startupApplications": null
   },
-  "accounts": [
-    {
+  "accounts": {
+    "1": {
       "userId": "1",
-      "username": "Root",
-      "email": "Root@Root",
-      "password": "Root"
-    },
-    {
-      "userId": "2",
-      "username": "Thijmen",
+      "username": "thijmen",
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",
       "pincode": "12345",
@@ -73,21 +83,6 @@
         "startMenu": null,
         "fonts": null
       }
-    },
-    {
-      "userId": "3",
-      "username": "Aukje",
-      "email": "Aukje@ik.nu",
-      "password": "Welkom01",
-      "pincode": "12345",
-      "preferences": {
-        "background": "C/images/wallpapers/02010-4.webp",
-        "colors": null,
-        "themes": null,
-        "lockscreen": null,
-        "startMenu": null,
-        "fonts": null
-      }
     }
-  ]
+  }
 }

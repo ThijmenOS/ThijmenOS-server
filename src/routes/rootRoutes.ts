@@ -1,5 +1,5 @@
 import IRouterConfig from "./IRouterConfig";
-import Route from "./Route";
+import Route from "./route";
 import { Router } from "express";
 import javascriptOs from "../../inversify.config";
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
@@ -8,7 +8,7 @@ import { HttpStatus, Response } from "../types/responseType";
 import ISettingsController from "../controllers/settings/ISettingsController";
 import SettingsController from "../controllers/settings/SettingsController";
 import Root from "../controllers/root/root";
-import { AccessObject, OSSettings, User } from "@thijmen-os/common";
+import { Accounts, OSSettings } from "@thijmen-os/common";
 import RootMethods from "../controllers/root/rootMethods";
 import { AccessObjectMap } from "@thijmen-os/common";
 
@@ -29,6 +29,10 @@ class RootRoutes extends Route implements IRouterConfig {
         "C/OperatingSystem/ThijmenOsData/settings.json"
       )!;
 
+      if (typeof rawFile === "number") {
+        return;
+      }
+
       res.send(
         new Response<OSSettings>({
           data: JSON.parse(rawFile),
@@ -42,15 +46,15 @@ class RootRoutes extends Route implements IRouterConfig {
         req.query.path as string
       );
 
-      res.send(new Response<string>({ data: result, status: HttpStatus.ok }));
+      res.send(
+        new Response<number | string>({ data: result, status: HttpStatus.ok })
+      );
     });
 
     this._router.get("/users", async (req, res) => {
       const result = await this._settingsController.GetAllUsers();
 
-      res.send(
-        new Response<Array<User>>({ data: result, status: HttpStatus.ok })
-      );
+      res.send(new Response<Accounts>({ data: result, status: HttpStatus.ok }));
     });
 
     this._router.get("/access", async (req, res) => {

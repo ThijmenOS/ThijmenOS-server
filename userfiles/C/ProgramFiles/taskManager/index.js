@@ -1,7 +1,6 @@
-import { ThijmenOS } from "../operatingSystemApi.js";
-const OS = new ThijmenOS("window");
+import * as OS from "../bin/index.js";
 
-await OS.startup(async () => await startup());
+OS.startup(() => startup());
 
 const tableElement = document.getElementById("p-table");
 
@@ -33,13 +32,13 @@ function processChange(processes) {
 }
 
 function killProcess(pid) {
-  OS.kill(pid);
+  OS.killp(pid);
 }
 
 function MainLoop() {
   let snapshot;
   setInterval(async () => {
-    const processes = await OS.getProcesses();
+    const processes = await OS.ps();
     const strProcesses = JSON.stringify(processes);
 
     if (strProcesses !== snapshot) {

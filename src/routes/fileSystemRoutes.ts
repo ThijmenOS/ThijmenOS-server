@@ -3,9 +3,9 @@ import javascriptOs from "../../inversify.config";
 import FileSystemController from "../controllers/filesystem/FileSystemController";
 import IFileSystemController from "../controllers/filesystem/IFileSystemController";
 import IRouterConfig from "./IRouterConfig";
-import Route from "./Route";
 import { AccessMap, Directory, Mkdir, Path } from "@thijmen-os/common";
 import { HttpStatus, Response } from "../types/responseType";
+import Route from "./route";
 
 class FileSystemRoutes extends Route implements IRouterConfig {
   private readonly _fileSystemController: IFileSystemController =
@@ -30,7 +30,9 @@ class FileSystemRoutes extends Route implements IRouterConfig {
 
       const result = this._fileSystemController.readFile(requestedFile);
 
-      res.send(new Response<string>({ data: result, status: HttpStatus.ok }));
+      res.send(
+        new Response<string | number>({ data: result, status: HttpStatus.ok })
+      );
     });
     this._router.post("/makeDirectory", (req, res) => {
       const body: { props: Mkdir; userId: string; access: AccessMap } =
