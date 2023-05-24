@@ -5,3 +5,6 @@ C/OperatingSystem/settings.json:1rw-:1rw-
 C/OperatingSystem/.access:1rw-:1rw-
 C/Users/Thijmen/Documents/new folder:2rwx:1rwx
 C/Users/Thijmen/Documents/new folder/new file.txt:2rwx:1rwx
+C/Users/thijmen/Documents/new-file.txt:2rwx:1rwx
+C/Users/thijmen/Documents/test.txt:2rwx:1rwx
+C/Users/thijmen/Documents/tr.txt:2rwx:1rwx

@@ -135,8 +135,45 @@ class FileSystemController implements IFileSystemController {
       return false;
     }
 
-    fs.rmSync(targetDir, { recursive: true });
-    this.removeFromAccess(props);
+    try {
+      fs.rmSync(targetDir, { recursive: true });
+      this.removeFromAccess(props);
+    } catch (err) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public removeFile(props: Path): boolean {
+    const targetDir = computeTargetDir(props);
+
+    if (!fs.existsSync(targetDir)) {
+      return false;
+    }
+
+    try {
+      fs.unlinkSync(targetDir);
+      this.removeFromAccess(props);
+    } catch (err) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public writeFile(path: Path, content: string): boolean {
+    const targetDir = computeTargetDir(path);
+
+    if (!fs.existsSync(targetDir)) {
+      return false;
+    }
+
+    try {
+      fs.writeFileSync(targetDir, content);
+    } catch (err) {
+      return false;
+    }
 
     return true;
   }

@@ -69,7 +69,7 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       );
     });
 
-    this._router.post("/removeDirectory", (req, res) => {
+    this._router.delete("/removeDirectory", (req, res) => {
       const bodyQuery: { Path: Path } = req.body;
 
       const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
@@ -78,6 +78,35 @@ class FileSystemRoutes extends Route implements IRouterConfig {
         new Response<boolean>({
           data: result,
           status: HttpStatus.created,
+        })
+      );
+    });
+
+    this._router.delete("/removeFile", (req, res) => {
+      const bodyQuery: { Path: Path } = req.body;
+
+      const result = this._fileSystemController.removeFile(bodyQuery.Path);
+
+      res.send(
+        new Response<boolean>({
+          data: result,
+          status: HttpStatus.created,
+        })
+      );
+    });
+
+    this._router.post("/writeFile", (req, res) => {
+      const reqBody: { path: Path; content: string } = req.body;
+
+      const result = this._fileSystemController.writeFile(
+        reqBody.path,
+        reqBody.content
+      );
+
+      res.send(
+        new Response<boolean>({
+          data: result,
+          status: HttpStatus.ok,
         })
       );
     });

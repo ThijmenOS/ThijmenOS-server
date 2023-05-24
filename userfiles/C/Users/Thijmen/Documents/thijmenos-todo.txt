@@ -1,0 +1,14 @@
+1. Fix access validation. It is not working /
+2. Make distinguishment between file removal and directory removal; use unlink() for file
+2. Implement file write
+3. Implement file lock - an application needs to be able to lock a file so other apps cant read it.
+4. Implment environment variables
+5. Implement signout
+6. Implement language support
+7. Implement color themes
+8. Log kernel actions and errors
+
+4. Implement application download
+5. Implement application delete
+6. Implement OS factory reset
+7. Implement shutdown

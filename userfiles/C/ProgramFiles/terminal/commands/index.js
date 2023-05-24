@@ -9,6 +9,10 @@ import cat from "./cat.js";
 import pstart from "./pstart.js";
 import waitpid from "./waitpid.js";
 import passwd from "./passwd.js";
+import touch from "./touch.js";
+import rm from "./rm.js";
+import rmdir from "./rmdir.js";
+import mkdir from "./mkdir.js";
 
 export {
   fOpen,
@@ -22,4 +26,8 @@ export {
   pstart,
   waitpid,
   passwd,
+  touch,
+  rm,
+  mkdir,
+  rmdir,
 };

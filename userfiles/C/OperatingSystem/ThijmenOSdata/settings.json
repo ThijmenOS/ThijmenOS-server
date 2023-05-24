@@ -71,6 +71,12 @@
   "accounts": {
     "1": {
       "userId": "1",
+      "username": "root",
+      "email": "root@thijmenbrand.nl",
+      "password": "Welkom01"
+    },
+    "2": {
+      "userId": "2",
       "username": "thijmen",
       "email": "Thijmen@ik.nu",
       "password": "Welkom01",

@@ -17,8 +17,22 @@ import usermod from "./usermod.js";
 import user from "./user.js";
 import passwd from "./passwd.js";
 import auth from "./auth.js";
+import rmdir from "./rmdir.js";
+import touch from "./touch.js";
+import mkdir from "./mkdir.js";
+import memAlloc from "./memAlloc.js";
+import memWrite from "./memWrite.js";
+import memRead from "./memRead.js";
+import rm from "./rm.js";
+import writeFile from "./writeFile.js";
 
 export {
+  memAlloc,
+  memRead,
+  memWrite,
+  mkdir,
+  rmdir,
+  touch,
   exit,
   fDialog,
   fOpen,
@@ -38,4 +52,6 @@ export {
   user,
   usermod,
   auth,
+  rm,
+  writeFile,
 };

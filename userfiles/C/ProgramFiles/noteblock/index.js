@@ -4,11 +4,14 @@ OS.startup(start);
 
 let pid;
 let mqHandle;
+let path;
 let fileSelectLoop;
 
 function initGui() {
   const openFileButton = document.getElementById("open-file");
   openFileButton.addEventListener("click", OpenFile);
+  const saveFileButton = document.getElementById("save-file");
+  saveFileButton.addEventListener("click", SaveFile);
 }
 
 async function start(args) {
@@ -19,6 +22,8 @@ async function start(args) {
 async function loadFileContent(filePath) {
   clearInterval(fileSelectLoop);
   if (!filePath) return;
+
+  path = filePath;
 
   const content = await OS.readFile(filePath);
 
@@ -48,4 +53,12 @@ async function OpenFile() {
       loadFileContent(message.path);
     }
   }, 100);
+}
+
+async function SaveFile() {
+  const textArea = document.getElementById("content");
+  const content = textArea.value;
+
+  const written = await OS.writeFile(path, content);
+  console.log(written);
 }

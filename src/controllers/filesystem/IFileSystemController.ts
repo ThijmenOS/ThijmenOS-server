@@ -15,4 +15,6 @@ export default interface IFileSystemController {
     subjectId: string,
     accessLevels: AccessMap
   ): string | null;
+  removeFile(props: Path): boolean;
+  writeFile(path: Path, content: string): boolean;
 }
