@@ -12,4 +12,49 @@ textarea {
 }
 .top-header {
     width: 100%;
+    background-color: gray;
+}
+
+.file-button {
+    padding: 0.3em;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.file-button {
+    margin: 0;
+    display: inline-block;
+    padding: 0.3em;
+    color: white;
+}
+
+.file-button:hover {
+    background-color: rgb(90, 90, 90);
+}
+
+.selection-menu {
+    display: none;
+    background-color: gray;
+    position: absolute;
+    top: 1.7em;
+    left: 0;
+}
+
+.selection-menu > ul {
+    padding: 0;
+}
+
+.selection-menu > ul > li {
+    color: white;
+    list-style: none;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.selection-menu > ul > li:hover {
+    background-color: rgb(77, 77, 77);
+}
+
+.visible {
+    display: block !important;
 }

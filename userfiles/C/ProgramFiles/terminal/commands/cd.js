@@ -1,7 +1,7 @@
 import * as OS from "../../bin/cd.js";
 import argumentParser from "./argParsers/--parser.js";
 
-async function ls(args, term) {
+async function cd(args, term) {
   const parsedArgs = argumentParser(args);
   if (!parsedArgs) throw new Error("no path specified");
 
@@ -19,4 +19,4 @@ async function ls(args, term) {
   term.set_prompt(`${result}>`);
 }
 
-export default ls;
+export default cd;

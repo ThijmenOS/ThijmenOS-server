@@ -41,16 +41,6 @@ class RootRoutes extends Route implements IRouterConfig {
       );
     });
 
-    this._router.get("/changeDirectory", (req, res) => {
-      const result = this._fileSystemController.dirExists(
-        req.query.path as string
-      );
-
-      res.send(
-        new Response<number | string>({ data: result, status: HttpStatus.ok })
-      );
-    });
-
     this._router.get("/users", async (req, res) => {
       const result = await this._settingsController.GetAllUsers();
 

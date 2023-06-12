@@ -1,4 +1,5 @@
-import * as OS from "../../bin/readFile.js";
+import fopen from "../../bin/fopen.js";
+import fread from "../../bin/fread.js";
 import argumentParser from "./argParsers/--parser.js";
 
 async function cat(args, term) {
@@ -10,7 +11,9 @@ async function cat(args, term) {
       ? parsedArgs
       : term.global.get_var("path") + "/" + parsedArgs;
 
-  const result = await OS.default(targetPath);
+  const fh = await fopen(targetPath, "r");
+  const result = fread(fh);
+
   if (result == -1)
     throw new Error("target file does not exist or could not be openend");
 

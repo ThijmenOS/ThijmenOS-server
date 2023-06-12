@@ -1,13 +1,13 @@
 import sysCall from "./sysCall.js";
 import listen from "./listen.js";
 
-async function fOpen(path, mimetype) {
-  const messageId = sysCall("openFile", {
-    filePath: path,
-    mimeType: mimetype,
+async function fread(path, mode) {
+  const messageId = sysCall("fopen", {
+    path: path,
+    mode: mode,
   });
 
   return await listen(messageId);
 }
 
-export default fOpen;
+export default fread;

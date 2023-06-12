@@ -1,6 +1,6 @@
 import exit from "./exit.js";
 import fDialog from "./fdialog.js";
-import fOpen from "./fopen.js";
+import Open from "./open.js";
 import killMq from "./killMq.js";
 import killp from "./killp.js";
 import listen from "./listen.js";
@@ -8,7 +8,7 @@ import ls from "./ls.js";
 import mqOpen from "./mqOpen.js";
 import ps from "./ps.js";
 import pstart from "./pstart.js";
-import readFile from "./readFile.js";
+import fread from "./fread.js";
 import readMsg from "./readMsg.js";
 import sendMsg from "./sendMsg.js";
 import startup from "./startup.js";
@@ -24,7 +24,10 @@ import memAlloc from "./memAlloc.js";
 import memWrite from "./memWrite.js";
 import memRead from "./memRead.js";
 import rm from "./rm.js";
-import writeFile from "./writeFile.js";
+import fwrite from "./fwrite.js";
+import fopen from "./fopen.js";
+import ffree from "./ffree.js";
+import flock from "./flock.js";
 
 export {
   memAlloc,
@@ -35,7 +38,7 @@ export {
   touch,
   exit,
   fDialog,
-  fOpen,
+  Open,
   killMq,
   killp,
   listen,
@@ -43,7 +46,7 @@ export {
   mqOpen,
   ps,
   pstart,
-  readFile,
+  fread,
   readMsg,
   sendMsg,
   startup,
@@ -53,5 +56,8 @@ export {
   usermod,
   auth,
   rm,
-  writeFile,
+  fwrite,
+  fopen,
+  ffree,
+  flock,
 };

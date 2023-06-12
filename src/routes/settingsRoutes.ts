@@ -4,7 +4,7 @@ import SettingsController from "../controllers/settings/SettingsController";
 import { Router } from "express";
 import javascriptOs from "../../inversify.config";
 import IRouterConfig from "./IRouterConfig";
-import Route from "./Route";
+import Route from "./route";
 import { HttpStatus, Response } from "../types/responseType";
 
 class SettingsRoutes extends Route implements IRouterConfig {

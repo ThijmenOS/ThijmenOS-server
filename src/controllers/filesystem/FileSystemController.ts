@@ -26,6 +26,18 @@ class FileSystemController implements IFileSystemController {
     return ret;
   }
 
+  public open(path: string): string | false {
+    const targetFile = computeTargetDir(path);
+
+    try {
+      const fileContent = fs.readFileSync(targetFile, { encoding: "utf-8" });
+
+      return fileContent;
+    } catch {
+      return false;
+    }
+  }
+
   private registerAccess(path: Path, userId: string, access: AccessMap) {
     //TODO: Make this env variable
     //TODO: Implement groups
@@ -78,6 +90,22 @@ class FileSystemController implements IFileSystemController {
   public dirExists(dir: string): number | string {
     const targetDir = computeTargetDir(dir);
     const normalised = path.normalize(targetDir);
+    if (!fs.existsSync(normalised)) return -1;
+    if (!fs.lstatSync(normalised).isDirectory()) return -1;
+
+    const cleaned = normalised.split("\\");
+    cleaned.shift();
+
+    if (cleaned.at(-1) === "") cleaned.pop();
+    if (cleaned.length <= 0) return -1;
+
+    return cleaned.join("/");
+  }
+
+  public pathExists(dir: string): number | string {
+    const targetDir = computeTargetDir(dir);
+    const normalised = path.normalize(targetDir);
+
     if (!fs.existsSync(normalised)) return -1;
 
     const cleaned = normalised.split("\\");
@@ -139,6 +167,7 @@ class FileSystemController implements IFileSystemController {
       fs.rmSync(targetDir, { recursive: true });
       this.removeFromAccess(props);
     } catch (err) {
+      console.log(err);
       return false;
     }
 
@@ -146,16 +175,23 @@ class FileSystemController implements IFileSystemController {
   }
 
   public removeFile(props: Path): boolean {
-    const targetDir = computeTargetDir(props);
+    const targetPath = computeTargetDir(props);
 
-    if (!fs.existsSync(targetDir)) {
+    if (!fs.existsSync(targetPath)) {
       return false;
     }
 
     try {
-      fs.unlinkSync(targetDir);
+      const isDir = fs.lstatSync(targetPath).isDirectory();
+
+      if (isDir) {
+        fs.rmSync(targetPath, { recursive: true, force: true });
+      } else {
+        fs.rmSync(targetPath);
+      }
       this.removeFromAccess(props);
     } catch (err) {
+      console.log(err);
       return false;
     }
 

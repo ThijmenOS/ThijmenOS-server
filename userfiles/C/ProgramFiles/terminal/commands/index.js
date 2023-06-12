@@ -1,4 +1,4 @@
-import fOpen from "./fopen.js";
+import open from "./open.js";
 import killp from "./killp.js";
 import ps from "./ps.js";
 import usermod from "./usermod.js";
@@ -11,11 +11,10 @@ import waitpid from "./waitpid.js";
 import passwd from "./passwd.js";
 import touch from "./touch.js";
 import rm from "./rm.js";
-import rmdir from "./rmdir.js";
 import mkdir from "./mkdir.js";
 
 export {
-  fOpen,
+  open,
   killp,
   ps,
   usermod,
@@ -29,5 +28,4 @@ export {
   touch,
   rm,
   mkdir,
-  rmdir,
 };

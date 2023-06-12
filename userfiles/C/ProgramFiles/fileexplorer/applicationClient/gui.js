@@ -66,7 +66,7 @@ async function openFile(path) {
 
   console.log(mimetype);
 
-  await OS.fOpen(path, mimetype);
+  await OS.Open(path, mimetype);
 }
 
 function pupulateHtml(files) {
@@ -109,6 +109,7 @@ function pupulateHtml(files) {
   };
 
   const listEl = document.createElement("ul");
+
   files.forEach((file) => {
     const text = constructText(file.filePath.split("/").at(-1));
     const img = constructImage(

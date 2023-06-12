@@ -16,6 +16,16 @@ class FileSystemRoutes extends Route implements IRouterConfig {
   }
 
   public get routes(): Router {
+    this._router.get("/open", (req, res) => {
+      const requestedFile = req.query.file as string;
+
+      const result = this._fileSystemController.open(requestedFile);
+
+      res.send(
+        new Response<string | false>({ data: result, status: HttpStatus.ok })
+      );
+    });
+
     this._router.get("/showUserFiles", (req, res) => {
       const requestedDir: string = (req.query.dir as string) || "";
 
@@ -69,10 +79,31 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       );
     });
 
+    this._router.get("/changeDirectory", (req, res) => {
+      const result = this._fileSystemController.dirExists(
+        req.query.path as string
+      );
+
+      res.send(
+        new Response<number | string>({ data: result, status: HttpStatus.ok })
+      );
+    });
+
+    this._router.get("/validateFileExistance", (req, res) => {
+      const result = this._fileSystemController.pathExists(
+        req.query.path as string
+      );
+
+      res.send(
+        new Response<number | string>({ data: result, status: HttpStatus.ok })
+      );
+    });
+
     this._router.delete("/removeDirectory", (req, res) => {
       const bodyQuery: { Path: Path } = req.body;
 
       const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
+      console.log(result);
 
       res.send(
         new Response<boolean>({
