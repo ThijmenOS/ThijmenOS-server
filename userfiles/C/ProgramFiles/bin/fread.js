@@ -1,10 +1,10 @@
 import sysCall from "./sysCall.js";
 import listen from "./listen.js";
 
-async function fdialog() {
-  const messageId = sysCall("selectFile");
+async function fread(fileHandle) {
+  const messageId = sysCall("fread", fileHandle);
 
   return await listen(messageId);
 }
 
-export default fdialog;
+export default fread;

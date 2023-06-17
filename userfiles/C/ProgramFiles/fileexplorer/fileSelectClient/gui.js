@@ -17,19 +17,9 @@ function listenForParentExit() {
   }, 100);
 }
 
-function extractArgs(args) {
-  const argsArr = args.split(" ");
-  const pidKey = argsArr.findIndex((arg) => arg === "--pid");
-  if (!pidKey) OS.exit(1);
-
-  const pid = argsArr[pidKey + 1];
-  if (!pid) OS.exit(1);
-
-  return Number(pid);
-}
-
 async function init(args) {
-  parentPid = extractArgs(args);
+  parentPid = args.metadata.parentPid;
+  console.log(args.args);
   listenForParentExit();
 
   mqHandle = await OS.mqOpen("DebugMQ", [1]);

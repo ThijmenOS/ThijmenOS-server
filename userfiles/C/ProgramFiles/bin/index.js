@@ -1,5 +1,4 @@
 import exit from "./exit.js";
-import fDialog from "./fdialog.js";
 import Open from "./open.js";
 import killMq from "./killMq.js";
 import killp from "./killp.js";
@@ -28,6 +27,7 @@ import fwrite from "./fwrite.js";
 import fopen from "./fopen.js";
 import ffree from "./ffree.js";
 import flock from "./flock.js";
+import errors from "./errorCodes.js";
 
 export {
   memAlloc,
@@ -37,7 +37,6 @@ export {
   rmdir,
   touch,
   exit,
-  fDialog,
   Open,
   killMq,
   killp,
@@ -60,4 +59,5 @@ export {
   fopen,
   ffree,
   flock,
+  errors,
 };

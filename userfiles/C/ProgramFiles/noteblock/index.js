@@ -4,8 +4,6 @@ import fileHandling from "./methds/file-handling.js";
 
 OS.startup(start);
 
-function initGui() {}
-
 async function start(args) {
   initDropdown();
   initButtons();
@@ -18,7 +16,7 @@ async function start(args) {
     }
   });
 
-  if (args) {
-    fileHandling.LoadFile(args);
+  if (args.args) {
+    fileHandling.LoadFile(args.args);
   }
 }

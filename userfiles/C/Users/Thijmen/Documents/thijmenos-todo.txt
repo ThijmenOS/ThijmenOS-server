@@ -2,6 +2,8 @@
 2. Fase out backend api except for read and write endpoints. All other things go to the frontend.
 3. When backend api is fased out, before refresh or on shutdown implement method to write changes to disk (.access file)
 
+aaaaaaaaaa
+
 
 
 1. Fix access validation. It is not working /
