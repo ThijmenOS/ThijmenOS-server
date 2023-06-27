@@ -6,6 +6,7 @@ let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
 let parentPid = null;
 let mqHandle;
+let startupArgs;
 
 await OS.startup((args) => init(args));
 
@@ -17,17 +18,37 @@ function listenForParentExit() {
   }, 100);
 }
 
+function parseArgs(args) {
+  const argsArr = args.split(" ");
+  const argsObj = {};
+
+  for (let i = 0; i < argsArr.length; i += 2) {
+    argsObj[argsArr[i].slice(2)] = argsArr[i + 1];
+  }
+
+  return argsObj;
+}
+
 async function init(args) {
   parentPid = args.metadata.parentPid;
-  console.log(args.args);
+  startupArgs = parseArgs(args.args);
   listenForParentExit();
 
-  mqHandle = await OS.mqOpen("DebugMQ", [1]);
+  mqHandle = await OS.mqOpen(startupArgs.msg_queue_name, [1]);
 
   document.getElementById("left-arrow").addEventListener("click", handleBack);
   document
     .getElementById("right-arrow")
     .addEventListener("click", handleForward);
+
+  if (startupArgs.mode === "file_save") {
+    const fileNameInput = document.getElementById("file-name");
+    fileNameInput.value = startupArgs.defaultFileName ?? "new-file.txt";
+
+    document
+      .getElementById("save-as-button")
+      .addEventListener("click", () => saveFile(fileNameInput.value));
+  }
 
   setTimeout(() => {
     listFiles(currentPath);
@@ -49,6 +70,24 @@ function handleForward() {
   listFiles(history[currentPathIndex]);
 }
 
+async function saveFile(fileName) {
+  if (!fileName) return;
+
+  const mimetype = fileName.split(".").at(-1);
+
+  const messageCode = await OS.sendMsg(mqHandle, {
+    path: history[currentPathIndex],
+    name: fileName,
+    mimetype: mimetype,
+  });
+
+  if (messageCode === 0) {
+    OS.exit(0);
+  } else {
+    console.error(`message failed to send with error code ${messageCode}`);
+  }
+}
+
 function appendToHistory(path) {
   history.push(path);
   currentPathIndex++;
@@ -64,7 +103,9 @@ function handleClick(path, isDir) {
   if (isDir) {
     listFiles(path);
     appendToHistory(path);
-  } else {
+  }
+
+  if (startupArgs.mode === "file_select") {
     openFile(path);
   }
 }

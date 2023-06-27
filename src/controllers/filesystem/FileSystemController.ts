@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import * as fsasync from "fs/promises";
 import { injectable } from "inversify";
 import IFileSystemController from "./IFileSystemController";
 import { Access, AccessMap, Directory, Mkdir, Path } from "@thijmen-os/common";
@@ -156,7 +157,7 @@ class FileSystemController implements IFileSystemController {
     return "Something went wrong";
   }
 
-  public removeDirectory(props: Path): boolean {
+  public async removeDirectory(props: Path): Promise<boolean> {
     const targetDir = computeTargetDir(props);
 
     if (!fs.existsSync(targetDir)) {
@@ -164,7 +165,7 @@ class FileSystemController implements IFileSystemController {
     }
 
     try {
-      fs.rmSync(targetDir, { recursive: true });
+      await fsasync.rmdir(targetDir, { recursive: true });
       this.removeFromAccess(props);
     } catch (err) {
       console.log(err);
@@ -174,7 +175,7 @@ class FileSystemController implements IFileSystemController {
     return true;
   }
 
-  public removeFile(props: Path): boolean {
+  public async removeFile(props: Path): Promise<boolean> {
     const targetPath = computeTargetDir(props);
 
     if (!fs.existsSync(targetPath)) {
@@ -185,9 +186,9 @@ class FileSystemController implements IFileSystemController {
       const isDir = fs.lstatSync(targetPath).isDirectory();
 
       if (isDir) {
-        fs.rmSync(targetPath, { recursive: true, force: true });
+        fsasync.rm(targetPath, { recursive: true, force: true });
       } else {
-        fs.rmSync(targetPath);
+        await fsasync.unlink(targetPath);
       }
       this.removeFromAccess(props);
     } catch (err) {

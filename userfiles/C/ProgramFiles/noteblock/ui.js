@@ -35,4 +35,7 @@ export function initButtons() {
 
   const closeButton = document.getElementById("close");
   closeButton.addEventListener("click", () => exit(0));
+
+  const saveAsButton = document.getElementById("save-as");
+  saveAsButton.addEventListener("click", () => fileHandling.SaveFileAs());
 }

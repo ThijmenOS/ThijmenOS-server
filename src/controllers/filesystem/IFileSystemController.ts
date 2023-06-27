@@ -11,12 +11,12 @@ export default interface IFileSystemController {
     subjectId: string,
     accessLevels: AccessMap
   ): string | null;
-  removeDirectory(props: Path): boolean;
+  removeDirectory(props: Path): Promise<boolean>;
   makeFile(
     props: Mkdir,
     subjectId: string,
     accessLevels: AccessMap
   ): string | null;
-  removeFile(props: Path): boolean;
+  removeFile(props: Path): Promise<boolean>;
   writeFile(path: Path, content: string): boolean;
 }

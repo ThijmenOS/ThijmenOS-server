@@ -99,11 +99,12 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       );
     });
 
-    this._router.delete("/removeDirectory", (req, res) => {
+    this._router.delete("/removeDirectory", async (req, res) => {
       const bodyQuery: { Path: Path } = req.body;
 
-      const result = this._fileSystemController.removeDirectory(bodyQuery.Path);
-      console.log(result);
+      const result = await this._fileSystemController.removeDirectory(
+        bodyQuery.Path
+      );
 
       res.send(
         new Response<boolean>({
@@ -113,10 +114,12 @@ class FileSystemRoutes extends Route implements IRouterConfig {
       );
     });
 
-    this._router.delete("/removeFile", (req, res) => {
+    this._router.delete("/removeFile", async (req, res) => {
       const bodyQuery: { Path: Path } = req.body;
 
-      const result = this._fileSystemController.removeFile(bodyQuery.Path);
+      const result = await this._fileSystemController.removeFile(
+        bodyQuery.Path
+      );
 
       res.send(
         new Response<boolean>({
