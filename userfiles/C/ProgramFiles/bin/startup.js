@@ -1,15 +1,18 @@
 import listen from "./listen.js";
+import sysCall from "./sysCall.js";
 
-async function startup(callback) {
+async function startup(startupArgs, callback) {
   const messageId = "startup";
+
+  sysCall("startup", startupArgs);
 
   const result = await listen(messageId);
 
   if (callback) {
     return callback(result);
-  } else {
-    return result;
   }
+
+  return result;
 }
 
 export default startup;

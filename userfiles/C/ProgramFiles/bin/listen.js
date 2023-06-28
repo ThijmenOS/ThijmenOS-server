@@ -1,19 +1,21 @@
 async function listen(messageId) {
   let response;
   const messagePromise = new Promise((resolve) => {
-    const callback = ({ data }) => {
-      if (data.id === messageId) {
-        console.log(data);
-        resolve(data.data);
-      }
-    };
-
     if (typeof window !== "undefined") {
-      window.onmessage = callback;
+      window.addEventListener("message", ({ data }) => {
+        if (data.id === messageId) {
+          resolve(data.data);
+        }
+      });
     } else {
-      onmessage = callback;
+      addEventListener("message", ({ data }) => {
+        if (data.id === messageId) {
+          resolve(data.data);
+        }
+      });
     }
   });
+
   await messagePromise.then((val) => (response = val));
   return response;
 }

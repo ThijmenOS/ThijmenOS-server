@@ -5,7 +5,7 @@ let history = ["C"];
 let currentPathIndex = 0;
 let currentPath = history[currentPathIndex];
 
-await OS.startup(() => init());
+await OS.startup({ winX: 1000, winY: 300 }, () => init());
 
 async function init(args) {
   document.getElementById("left-arrow").addEventListener("click", handleBack);

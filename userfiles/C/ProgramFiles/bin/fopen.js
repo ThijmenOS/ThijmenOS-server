@@ -3,7 +3,7 @@ import listen from "./listen.js";
 import { NO_RESOURCE_ACCESS } from "./errors/noResourceError.js";
 import { COULD_NOT_OPEN_FILE } from "./errors/fileErrors.js";
 
-async function fread(path, mode) {
+async function fopen(path, mode) {
   const messageId = sysCall("fopen", {
     path: path,
     mode: mode,
@@ -17,4 +17,4 @@ async function fread(path, mode) {
   return result;
 }
 
-export default fread;
+export default fopen;

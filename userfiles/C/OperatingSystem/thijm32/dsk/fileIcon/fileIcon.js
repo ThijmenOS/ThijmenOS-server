@@ -25,20 +25,15 @@ class FileIcon {
   async ConstructFileIcon(filePath) {
     const iconMetaData = await this.GetFileConfigurations(filePath);
 
-    const p = document.createElement("p");
-    p.innerText = iconMetaData.name;
+    if (!iconMetaData) {
+      //TODO: implement Couldnt get config error
+      throw new Error("a");
+    }
 
-    desktopElement.appendChild(p);
+    const iconIdentifier = this.InitialiseIconElements();
 
-    // if (!iconMetaData) {
-    //   //TODO: implement Couldnt get config error
-    //   throw new Error("a");
-    // }
-
-    // const iconIdentifier = this.InitialiseIconElements();
-
-    // this.RenderIcon(iconMetaData.name, iconMetaData.iconLocation);
-    // this.InitialiseIconBehaviour(iconIdentifier, iconMetaData);
+    this.RenderIcon(iconMetaData.name, iconMetaData.iconLocation);
+    this.InitialiseIconBehaviour(iconIdentifier, iconMetaData);
   }
 
   async GetFileConfigurations(filePath) {
@@ -94,8 +89,6 @@ class FileIcon {
     }
 
     const fh = await OS.fopen(path, READ);
-
-    console.log(path);
 
     if (typeof fh === "string") {
       throw new Error(fh);
