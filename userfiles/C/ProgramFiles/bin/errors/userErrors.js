@@ -1,0 +1,3 @@
+const NO_USER_SIGNED_IN = "NO_USER_SIGNED_IN";
+
+export { NO_USER_SIGNED_IN };

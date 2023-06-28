@@ -55,6 +55,8 @@ function handleClick(path, isDir) {
 
 async function listFiles(dir) {
   const files = await OS.ls(dir);
+
+  console.log(files);
   pupulateHtml(files);
   setCurrentPath(dir);
 }

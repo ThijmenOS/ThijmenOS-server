@@ -1,6 +1,7 @@
 1. Fix Error codes and give every command error codes that are descriptive to what went wrong
 2. Fase out backend api except for read and write endpoints. All other things go to the frontend.
 3. When backend api is fased out, before refresh or on shutdown implement method to write changes to disk (.access file)
+4. create memory deallocation syscall
 
 aaaaaaaaaa
 

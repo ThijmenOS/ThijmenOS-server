@@ -1,0 +1,40 @@
+:root {
+    --app-icon-width: 70px;
+    --app-icons-size: 50px;
+    --app-bar-height: 40px;
+}
+
+body {
+    background-color: black;
+}
+
+.javascript-os-file-icon-wrapper {
+    margin: 1em;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overlay-element {
+    width: 100%;
+    height: 93vh;
+}
+
+p {
+    color: white;
+}
+
+.app {
+    display: inline-flex;
+    flex-direction: row;
+    height: var(--app-icons-size);
+    width: var(--app-icon-width);
+    cursor: pointer;
+}
+
+.app>p {
+    font-size: 15px;
+    margin: 0;
+    color: white;
+    margin-top: 5px;
+}

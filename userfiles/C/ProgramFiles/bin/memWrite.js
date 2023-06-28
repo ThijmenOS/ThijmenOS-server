@@ -1,5 +1,6 @@
 import sysCall from "./sysCall.js";
 import listen from "./listen.js";
+import { PARAMETER_ERROR } from "./errors/paramError.js";
 
 async function memWrite(memKey, data) {
   const messageId = sysCall("memWrite", {
@@ -7,7 +8,11 @@ async function memWrite(memKey, data) {
     data: data,
   });
 
-  return await listen(messageId);
+  const result = await listen(messageId);
+
+  if (result === 1) return PARAMETER_ERROR;
+
+  return result;
 }
 
 export default memWrite;

@@ -3,6 +3,7 @@ async function listen(messageId) {
   const messagePromise = new Promise((resolve) => {
     const callback = ({ data }) => {
       if (data.id === messageId) {
+        console.log(data);
         resolve(data.data);
       }
     };

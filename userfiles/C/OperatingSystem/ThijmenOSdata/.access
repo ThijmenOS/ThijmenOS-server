@@ -3,6 +3,17 @@ C/OperatingSystem:1r--:1r--
 C/OperatingSystem/settings.json:1rw-:1rw-
 C/OperatingSystem/.access:1rw-:1rw-
 C:2rwx:2rwx
+C/OperatingSystem/thijm32:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/fileIcon:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/fileIcon/constants.js:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/fileIcon/fileIcon.js:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/utils:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/utils/createElementFromString.js:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/utils/generateUUID.js:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/constants.js:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/dsk.html:2rwx:2rwx
+C/OperatingSystem/thijm32/dsk/dsk.js:2rwx:2rwx
 C/Images:2rwx:2rwx
 C/Images/wallpapers:2rwx:2rwx
 C/Images/wallpapers/02010-4.webp:2rwx:2rwx
@@ -165,6 +176,9 @@ C/Users/thijmen/Desktop/New Folder:2rwx:2rwx
 C/Users/thijmen/Desktop/progam.js:2rwx:2rwx
 C/Users/thijmen/Desktop/someShit.html:2rwx:2rwx
 C/Users/thijmen/Desktop/test.txt:2rwx:2rwx
+C/Users/thijmen/Desktop/fileexplorer.thijm:2rwx:2rwx
+C/Users/thijmen/Desktop/taskManager.thijm:2rwx:2rwx
+C/Users/thijmen/Desktop/terminal.thijm:2rwx:2rwx
 C/Users/thijmen/Documents:2rwx:2rwx
 C/Users/thijmen/Documents/document.js:2rwx:2rwx
 C/Users/thijmen/Documents/thijmenos-todo.txt:2rwx:2rwx
