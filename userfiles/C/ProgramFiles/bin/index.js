@@ -28,6 +28,7 @@ import fopen from "./fopen.js";
 import ffree from "./ffree.js";
 import flock from "./flock.js";
 import errors from "./errorCodes.js";
+import createWindow from "./createWindow.js";
 
 export {
   memAlloc,
@@ -60,4 +61,5 @@ export {
   ffree,
   flock,
   errors,
+  createWindow,
 };

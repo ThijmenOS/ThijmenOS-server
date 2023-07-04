@@ -1,43 +1,53 @@
-import { NO_USER_SIGNED_IN } from "../../../ProgramFiles/bin/errors/userErrors.js";
-import * as OS from "../../../ProgramFiles/bin/index.js";
-import { desktopElement, memoryKey } from "./constants.js";
-import FileIcon from "./fileIcon/fileIcon.js";
+// import { NO_USER_SIGNED_IN } from "../../../ProgramFiles/bin/errors/userErrors.js";
+// import * as OS from "../../../ProgramFiles/bin/index.js";
+// import { desktopElement, memoryKey } from "./constants.js";
+// import FileIcon from "./fileIcon/fileIcon.js";
 
-OS.startup(initialiseDesktop);
+import { createWindow } from "../../../ProgramFiles/bin/index.js";
 
-function initialiseDesktop() {
-  OS.memAlloc(memoryKey, [0, 1]);
+const windowId = await createWindow("C/OperatingSystem/thijm32/dsk/dsk.html", {
+  windowHeight: 400,
+  windowWidth: 400,
+  windowTitle: "My new Window",
+});
 
-  loadDesktop();
-}
+console.log(windowId);
 
-async function getCurrentUser() {
-  const currentUser = await OS.user();
+// OS.startup({}, initialiseDesktop);
 
-  if (currentUser === NO_USER_SIGNED_IN) {
-    throw new OS.exit(-1);
-  }
+// function initialiseDesktop() {
+//   OS.memAlloc(memoryKey, [0, 1]);
 
-  return currentUser;
-}
+//   loadDesktop();
+// }
 
-async function loadDesktop() {
-  const currentUser = await getCurrentUser();
+// async function getCurrentUser() {
+//   const currentUser = await OS.user();
 
-  const filesOnDesktop = await OS.ls(currentUser.homeDir);
+//   if (currentUser === NO_USER_SIGNED_IN) {
+//     throw new OS.exit(-1);
+//   }
 
-  if (filesOnDesktop === "NO_RESOURCE_ACCESS") throw new OS.exit(-1);
+//   return currentUser;
+// }
 
-  const memWrite = await OS.memWrite(memoryKey, filesOnDesktop);
+// async function loadDesktop() {
+//   const currentUser = await getCurrentUser();
 
-  if (memWrite !== 0) throw new Error(memWrite);
+//   const filesOnDesktop = await OS.ls(currentUser.homeDir);
 
-  renderApps(filesOnDesktop);
-}
+//   if (filesOnDesktop === "NO_RESOURCE_ACCESS") throw new OS.exit(-1);
 
-function renderApps(apps) {
-  apps.forEach((file) => {
-    const icon = new FileIcon();
-    icon.ConstructFileIcon(file.filePath);
-  });
-}
+//   const memWrite = await OS.memWrite(memoryKey, filesOnDesktop);
+
+//   if (memWrite !== 0) throw new Error(memWrite);
+
+//   renderApps(filesOnDesktop);
+// }
+
+// function renderApps(apps) {
+//   apps.forEach((file) => {
+//     const icon = new FileIcon();
+//     icon.ConstructFileIcon(file.filePath);
+//   });
+// }
