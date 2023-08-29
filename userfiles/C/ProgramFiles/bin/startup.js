@@ -5,8 +5,6 @@ async function startup(callback) {
 
   const result = await listen(messageId);
 
-  console.log(result);
-
   if (callback) {
     return callback(result);
   }

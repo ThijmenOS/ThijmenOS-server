@@ -1,9 +1,7 @@
-setInterval(() => {
-    console.log("a")
-}, 1000);
+setInterval(() => {}, 1000);
 
 setTimeout(() => {
-    postMessage({
-        method: "terminateProcess"
-    })
+  postMessage({
+    method: "terminateProcess",
+  });
 }, 5000);
